@@ -2,7 +2,7 @@
   "name": "Ullr System",
   "short_name": "Ullr",
   "description": "Ullr Proof of Delivery System",
-  "start_url": "./index_070526.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0a0c10",
   "theme_color": "#0a0c10",
