@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ullr System — Proof of Delivery</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#0a0c10;--bg2:#12151c;--bg3:#1c2030;
+  --border:#2a2f3d;--border2:#363d50;
+  --mist:#b0bac8;--fog:#d4dae4;--white:#f0f4ff;
+  --blue:#3b82f6;--blue-dk:#2563eb;--blue-glow:rgba(59,130,246,0.12);
+  --green:#10b981;--amber:#f59e0b;
+  --r:12px;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--white);line-height:1.6;overflow-x:hidden;}
+
+/* NAV */
+nav{display:flex;align-items:center;justify-content:space-between;padding:18px 48px;border-bottom:1px solid var(--border);background:var(--bg);position:sticky;top:0;z-index:100;}
+.nav-logo{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;letter-spacing:3px;text-transform:uppercase;display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white);}
+.nav-cta{padding:10px 22px;background:var(--blue);color:white;border:none;border-radius:8px;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;text-decoration:none;}
+
+/* HERO */
+.hero{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:60px;padding:80px 48px;max-width:1200px;margin:0 auto;min-height:90vh;}
+.hero-copy{}
+.eyebrow{display:inline-block;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--green);border:1px solid rgba(16,185,129,0.3);background:rgba(16,185,129,0.07);padding:6px 16px;border-radius:99px;margin-bottom:28px;}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(36px,4vw,58px);font-weight:800;line-height:1.05;letter-spacing:-1.5px;margin-bottom:22px;}
+.hero h1 .accent{color:var(--blue);}
+.hero-sub{font-size:17px;color:var(--mist);line-height:1.65;margin-bottom:36px;max-width:460px;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-primary{padding:15px 32px;background:var(--blue);color:white;border:none;border-radius:10px;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;text-decoration:none;display:inline-block;}
+.btn-ghost{padding:15px 24px;background:transparent;color:var(--fog);border:1px solid var(--border);border-radius:10px;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;display:inline-block;}
+
+/* PHONE */
+.hero-visual{display:flex;justify-content:center;align-items:center;position:relative;}
+.phone{width:260px;height:520px;background:var(--bg);border-radius:38px;border:7px solid var(--border2);position:relative;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,0.7),0 0 0 1px var(--bg3),0 0 60px rgba(59,130,246,0.08);flex-shrink:0;}
+.phone::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:80px;height:20px;background:var(--bg3);border-radius:0 0 14px 14px;z-index:10;}
+.phone-inner{width:100%;height:100%;overflow:hidden;font-size:8px;}
+
+/* MINI APP UI */
+.mini-header{background:var(--bg2);border-bottom:1px solid var(--border);padding:8px 10px;display:flex;align-items:center;gap:6px;margin-top:20px;}
+.mini-logo-box{width:22px;height:22px;border-right:1px solid var(--border);padding-right:6px;display:flex;align-items:center;}
+.mini-title{font-family:'Syne',sans-serif;font-size:7.5px;font-weight:800;letter-spacing:2px;text-transform:uppercase;flex:1;}
+.mini-badge{font-family:'DM Sans',sans-serif;font-size:16px;font-weight:600;color:var(--blue);line-height:1;}
+.mini-badge-lbl{font-size:5.5px;letter-spacing:1px;text-transform:uppercase;color:var(--mist);text-align:right;}
+
+.mini-status{background:var(--bg2);border-bottom:1px solid var(--border);padding:5px 10px;display:flex;justify-content:space-between;align-items:center;}
+.mini-company{font-family:'DM Mono',monospace;font-size:6.5px;color:var(--mist);}
+.mini-dot{display:flex;align-items:center;gap:4px;font-size:6.5px;color:var(--green);}
+.mini-dot::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green);display:block;box-shadow:0 0 4px var(--green);}
+
+.mini-body{padding:8px;}
+.mini-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:10px;}
+.mini-label{font-size:5.5px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);margin-bottom:5px;font-weight:600;}
+.mini-input{width:100%;padding:7px 8px;background:var(--bg3);border:1px solid var(--border2);border-radius:6px;font-family:'DM Mono',monospace;font-size:8px;color:var(--white);margin-bottom:8px;}
+.mini-photo-btn{width:100%;padding:8px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:6px;font-size:7px;font-weight:600;color:#6ee7b7;text-align:center;margin-bottom:6px;position:relative;overflow:hidden;}
+.mini-photo-preview{width:100%;height:42px;background:#1a2a1a;border:1px solid rgba(16,185,129,0.3);border-radius:6px;margin-bottom:6px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.mini-photo-preview::after{content:'✓ Captured';font-size:6px;color:#6ee7b7;font-weight:600;letter-spacing:1px;}
+.mini-sig-btn{width:100%;padding:8px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.3);border-radius:6px;font-size:7px;font-weight:600;color:#6ee7b7;text-align:center;margin-bottom:8px;}
+.mini-checklist{display:flex;gap:4px;padding:7px 8px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;margin-bottom:8px;}
+.mini-check{flex:1;text-align:center;}
+.mini-check-dot{width:6px;height:6px;border-radius:50%;background:var(--green);margin:0 auto 3px;box-shadow:0 0 4px rgba(16,185,129,0.5);}
+.mini-check-lbl{font-size:5px;color:var(--green);letter-spacing:0.3px;text-transform:uppercase;font-weight:600;}
+.mini-save{width:100%;padding:10px;background:var(--blue);border-radius:6px;font-family:'Syne',sans-serif;font-size:7.5px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:white;text-align:center;}
+
+/* GLOW BEHIND PHONE */
+.phone-glow{position:absolute;width:300px;height:300px;background:radial-gradient(circle,rgba(59,130,246,0.15) 0%,transparent 70%);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:-1;}
+
+/* FEATURE STRIP */
+.strip{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);display:flex;justify-content:center;flex-wrap:wrap;}
+.strip-item{display:flex;align-items:center;gap:10px;padding:20px 32px;border-right:1px solid var(--border);}
+.strip-item:last-child{border-right:none;}
+.strip-icon{font-size:18px;}
+.strip-text{font-size:13px;font-weight:600;color:var(--fog);}
+.strip-sub{font-size:11px;color:var(--mist);}
+
+/* CENTRAL SECTION */
+.central{padding:80px 48px;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.central-copy .tag{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mist);margin-bottom:16px;}
+.central-copy h2{font-family:'Syne',sans-serif;font-size:clamp(28px,3vw,42px);font-weight:800;margin-bottom:20px;line-height:1.1;}
+.central-copy p{font-size:15px;color:var(--mist);line-height:1.7;margin-bottom:16px;}
+.central-visual{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
+.drive-header{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
+.drive-icon{font-size:16px;}
+.drive-title{font-family:'DM Mono',monospace;font-size:12px;color:var(--fog);}
+.drive-row{display:flex;justify-content:space-between;align-items:center;padding:11px 18px;border-bottom:1px solid var(--border);font-size:12px;}
+.drive-row:last-child{border-bottom:none;}
+.drive-name{color:var(--fog);font-family:'DM Mono',monospace;font-size:11px;}
+.drive-meta{font-size:10px;color:var(--mist);}
+.drive-badge{font-size:9px;font-weight:600;letter-spacing:1px;padding:3px 8px;border-radius:99px;background:rgba(16,185,129,0.12);color:var(--green);border:1px solid rgba(16,185,129,0.2);}
+
+/* WHO IT'S FOR */
+.for-section{padding:80px 48px;max-width:1100px;margin:0 auto;}
+.for-section .tag{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mist);margin-bottom:14px;}
+.for-section h2{font-family:'Syne',sans-serif;font-size:clamp(26px,3vw,38px);font-weight:800;line-height:1.1;margin-bottom:40px;max-width:600px;}
+.for-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.for-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:22px 20px;}
+.for-icon{font-size:22px;margin-bottom:14px;display:block;}
+.for-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:6px;}
+.for-desc{font-size:12.5px;color:var(--mist);line-height:1.55;}
+
+/* COMPARISON */
+.compare-section{padding:80px 48px;border-top:1px solid var(--border);background:var(--bg2);}
+.compare-inner{max-width:900px;margin:0 auto;}
+.compare-inner .tag{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mist);margin-bottom:14px;text-align:center;width:100%;}
+.compare-inner h2{font-family:'Syne',sans-serif;font-size:clamp(26px,3vw,38px);font-weight:800;line-height:1.1;margin-bottom:44px;text-align:center;}
+.compare-table{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
+.compare-col-head{padding:16px 24px;font-family:'Syne',sans-serif;font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;}
+.compare-col-head.without{background:rgba(239,68,68,0.06);color:#fca5a5;border-right:1px solid var(--border);}
+.compare-col-head.with{background:rgba(16,185,129,0.08);color:#6ee7b7;}
+.compare-row{display:contents;}
+.compare-cell{padding:15px 24px;font-size:14px;border-top:1px solid var(--border);}
+.compare-cell.without{color:var(--mist);border-right:1px solid var(--border);}
+.compare-cell.without::before{content:'✕ ';color:#ef4444;font-weight:700;}
+.compare-cell.with{color:var(--fog);font-weight:500;}
+.compare-cell.with::before{content:'✓ ';color:var(--green);font-weight:700;}
+
+/* FAQ */
+.faq-section{padding:80px 48px;max-width:800px;margin:0 auto;}
+.faq-section .tag{display:block;text-align:center;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mist);margin-bottom:14px;}
+.faq-section h2{font-family:'Syne',sans-serif;font-size:clamp(26px,3vw,38px);font-weight:800;text-align:center;margin-bottom:40px;}
+.faq-item{border-bottom:1px solid var(--border);}
+.faq-item:first-child{border-top:1px solid var(--border);}
+.faq-q{width:100%;text-align:left;background:none;border:none;color:var(--white);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;padding:20px 4px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;}
+.faq-q-mark{font-family:'Syne',sans-serif;color:var(--blue);font-size:16px;flex-shrink:0;transition:transform 0.2s;}
+.faq-item.open .faq-q-mark{transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.25s ease, padding 0.25s ease;font-size:14px;color:var(--mist);line-height:1.65;padding:0 4px;}
+.faq-item.open .faq-a{max-height:200px;padding:0 4px 20px;}
+
+@media(max-width:800px){
+  .for-grid{grid-template-columns:1fr 1fr;}
+  .compare-table{grid-template-columns:1fr;}
+  .compare-col-head.without,.compare-cell.without{border-right:none;}
+  .compare-cell.with{border-top:none;}
+  .for-section,.compare-section,.faq-section{padding:48px 20px;}
+}
+
+/* CTA */
+.cta{text-align:center;padding:100px 48px;border-top:1px solid var(--border);}
+.cta-tag{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--amber);border:1px solid rgba(245,158,11,0.3);background:rgba(245,158,11,0.07);padding:5px 14px;border-radius:99px;margin-bottom:24px;}
+.cta-title{font-family:'Syne',sans-serif;font-size:clamp(30px,4vw,52px);font-weight:800;letter-spacing:-1px;margin-bottom:16px;line-height:1.05;}
+.cta-sub{font-size:16px;color:var(--mist);margin-bottom:44px;}
+.email-row{display:flex;gap:10px;max-width:460px;margin:0 auto;flex-wrap:wrap;justify-content:center;}
+.email-input{flex:1;min-width:220px;padding:14px 18px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--white);outline:none;}
+.email-input:focus{border-color:var(--blue);}
+.email-input::placeholder{color:var(--border2);}
+.small-note{font-size:12px;color:var(--mist);margin-top:16px;}
+
+footer{padding:24px 48px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:12px;}
+.footer-top{display:flex;justify-content:space-between;align-items:center;}
+.footer-logo{font-family:'Syne',sans-serif;font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--mist);}
+.footer-copy{font-size:12px;color:var(--mist);}
+.footer-legal{font-size:11px;color:var(--border2);line-height:1.6;border-top:1px solid var(--border);padding-top:12px;}
+.footer-legal a{color:var(--mist);}
+
+/* SPREADSHEET SECTION */
+.sheet-section{padding:80px 48px;border-top:1px solid var(--border);}
+.sheet-section-inner{max-width:1100px;margin:0 auto;}
+.sheet-intro{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:40px;}
+.sheet-intro-copy .tag{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mist);margin-bottom:14px;}
+.sheet-intro-copy h2{font-family:'Syne',sans-serif;font-size:clamp(26px,3vw,38px);font-weight:800;line-height:1.1;margin-bottom:14px;}
+.sheet-intro-copy p{font-size:15px;color:var(--mist);line-height:1.7;}
+.sheet-pills{display:flex;flex-wrap:wrap;gap:8px;align-self:flex-end;}
+.sheet-pill{display:flex;align-items:center;gap:7px;padding:8px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:99px;font-size:12px;color:var(--fog);font-weight:500;}
+.sheet-pill-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+
+/* The spreadsheet mockup */
+.sheet-wrap{border-radius:12px;overflow:hidden;border:1px solid #c7c7c7;box-shadow:0 20px 60px rgba(0,0,0,0.5);}
+.sheet-chrome{background:#f1f3f4;border-bottom:1px solid #dadce0;padding:8px 12px;display:flex;align-items:center;gap:10px;}
+.sheet-chrome-dots{display:flex;gap:5px;}
+.sheet-chrome-dot{width:10px;height:10px;border-radius:50%;}
+.sheet-chrome-title{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#444;flex:1;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px;}
+.sheet-chrome-icon{width:16px;height:16px;}
+.sheet-tab-bar{background:#f8f9fa;border-bottom:1px solid #dadce0;display:flex;align-items:center;padding:0 12px;}
+.sheet-tab{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:#1a73e8;border-bottom:2px solid #1a73e8;padding:7px 14px;background:white;}
+
+/* The actual table */
+.gs-table{width:100%;border-collapse:collapse;background:white;font-family:'Arial',sans-serif;font-size:12px;overflow-x:auto;display:block;}
+.gs-table thead tr{background:#f8f9fa;}
+.gs-col-header{background:#f8f9fa;border:1px solid #e0e0e0;padding:5px 8px;font-size:11px;font-weight:500;color:#666;text-align:center;min-width:28px;width:28px;user-select:none;}
+.gs-row-num{background:#f8f9fa;border:1px solid #e0e0e0;padding:5px 8px;font-size:11px;color:#888;text-align:center;min-width:28px;width:28px;user-select:none;}
+.gs-th{background:#f8f9fa;border:1px solid #e0e0e0;padding:6px 10px;font-size:11px;font-weight:600;color:#444;white-space:nowrap;}
+.gs-td{border:1px solid #e8e8e8;padding:6px 10px;font-size:11px;color:#333;white-space:nowrap;}
+.gs-td.alt{background:#f8fbff;}
+tr.even .gs-td{background:#f9f9f9;}
+tr.even .gs-td.alt{background:#f1f6ff;}
+.gs-link{color:#1a73e8;text-decoration:none;font-weight:500;}
+.gs-link:hover{text-decoration:underline;}
+.gs-frozen{background:#e8f0fe !important;font-weight:600;color:#333;}
+
+@media(max-width:800px){
+  nav{padding:14px 20px;}
+  .nav-logo{font-size:14px;letter-spacing:2px;}
+  .hero{grid-template-columns:1fr;min-height:auto;gap:36px;padding:48px 20px;}
+  .hero-sub{font-size:15px;}
+  .hero-visual{order:-1;}
+  .phone{width:220px;height:440px;}
+  .strip{flex-direction:column;}
+  .strip-item{border-right:none;border-bottom:1px solid var(--border);padding:16px 20px;}
+  .strip-item:last-child{border-bottom:none;}
+  .central{grid-template-columns:1fr !important;gap:32px;padding:48px 20px;}
+  .central-copy h2{font-size:28px;}
+  .sheet-section{padding:48px 20px;}
+  .sheet-intro{grid-template-columns:1fr;gap:28px;}
+  .sheet-intro-copy h2{font-size:26px;}
+  .gs-td,.gs-th{padding:5px 8px;}
+  .cta{padding:64px 20px;}
+  .cta-title{font-size:32px;letter-spacing:-0.5px;}
+  footer{padding:20px;flex-direction:column;gap:8px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">
+    <svg width="22" height="22" viewBox="0 0 56 56" fill="none">
+      <path d="M8 28 Q28 4 50 8" stroke="#3b82f6" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M8 28 Q8 50 32 52" stroke="#3b82f6" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <line x1="10" y1="46" x2="48" y2="10" stroke="#f0f4ff" stroke-width="2" stroke-linecap="round"/>
+      <polygon points="48,10 42,15 46,20" fill="#3b82f6"/>
+    </svg>
+    Ullr System
+  </a>
+  <div style="display:flex;align-items:center;gap:28px;">
+    <a href="#who" style="font-size:13px;color:var(--fog);text-decoration:none;">Who it's for</a>
+    <a href="#faq" style="font-size:13px;color:var(--fog);text-decoration:none;">FAQ</a>
+    <a class="nav-cta" href="#access">Request Access</a>
+  </div>
+</nav>
+<style>@media(max-width:800px){nav div a:not(.nav-cta){display:none;}}</style>
+
+<div class="hero">
+  <div class="hero-copy">
+    <span class="eyebrow">No app. No setup. No paper.</span>
+    <h1>Proof of delivery,<br>in their <span class="accent">pocket.</span></h1>
+    <p class="hero-sub">All your drivers. All your deliveries. GPS-stamped, photographed, signed — and in your Google Drive before they've pulled away.</p>
+    <div class="hero-btns">
+      <a class="btn-primary" href="#access">Try it for free</a>
+      <a class="btn-ghost" href="#central">How it stores ↓</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="phone-glow"></div>
+    <div class="phone">
+      <div class="phone-inner">
+        <div class="mini-header">
+          <div class="mini-logo-box">
+            <svg width="14" height="14" viewBox="0 0 56 56" fill="none">
+              <path d="M8 28 Q28 4 50 8" stroke="#3b82f6" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <path d="M8 28 Q8 50 32 52" stroke="#3b82f6" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <line x1="10" y1="46" x2="48" y2="10" stroke="#f0f4ff" stroke-width="2.5" stroke-linecap="round"/>
+              <polygon points="48,10 42,15 46,20" fill="#3b82f6"/>
+            </svg>
+          </div>
+          <div class="mini-title" style="font-family:'Syne',sans-serif;">Ullr System</div>
+          <div style="text-align:right;">
+            <div class="mini-badge">4</div>
+            <div class="mini-badge-lbl">Pending</div>
+          </div>
+        </div>
+        <div class="mini-status">
+          <span class="mini-company">acme-logistics — j.smith</span>
+          <span class="mini-dot">Connected</span>
+        </div>
+        <div class="mini-body">
+          <div class="mini-card">
+            <div class="mini-label">Order Number</div>
+            <div class="mini-input">DD-4821</div>
+            <div class="mini-photo-preview"></div>
+            <div class="mini-sig-btn">✓ Signed — James Wilson</div>
+            <div class="mini-checklist">
+              <div class="mini-check">
+                <div class="mini-check-dot"></div>
+                <div class="mini-check-lbl">Order no.</div>
+              </div>
+              <div class="mini-check">
+                <div class="mini-check-dot"></div>
+                <div class="mini-check-lbl">Photo</div>
+              </div>
+              <div class="mini-check">
+                <div class="mini-check-dot"></div>
+                <div class="mini-check-lbl">Signature</div>
+              </div>
+            </div>
+            <div class="mini-save">Save Delivery</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="strip">
+  <div class="strip-item">
+    <span class="strip-icon">📸</span>
+    <div>
+      <div class="strip-text">Photo capture</div>
+      <div class="strip-sub">Compressed, filed instantly</div>
+    </div>
+  </div>
+  <div class="strip-item">
+    <span class="strip-icon">📍</span>
+    <div>
+      <div class="strip-text">GPS timestamped</div>
+      <div class="strip-sub">Exact location, every time</div>
+    </div>
+  </div>
+  <div class="strip-item">
+    <span class="strip-icon">✍️</span>
+    <div>
+      <div class="strip-text">Digital signature</div>
+      <div class="strip-sub">Name + sign-on-screen</div>
+    </div>
+  </div>
+  <div class="strip-item">
+    <span class="strip-icon">☁️</span>
+    <div>
+      <div class="strip-text">Google Drive sync</div>
+      <div class="strip-sub">All drivers, one folder</div>
+    </div>
+  </div>
+  <div class="strip-item">
+    <span class="strip-icon">📊</span>
+    <div>
+      <div class="strip-text">Weekly reports</div>
+      <div class="strip-sub">Weekly reports auto-emailed</div>
+    </div>
+  </div>
+</div>
+
+<div class="central" id="central">
+  <div class="central-copy">
+    <div class="tag">One place for everything</div>
+    <h2>All drivers.<br>All deliveries.<br>One Drive folder.</h2>
+    <p>All your drivers feed into the same weekly sheet, automatically. Order number, timestamp, GPS link, photo, signature — one row per delivery.</p>
+    <p>For transport managers it's handed to you on a plate. No chasing, no manual logging, no end-of-week scramble.</p>
+  </div>
+  <div class="central-visual">
+    <div class="drive-header">
+      <span class="drive-icon">📁</span>
+      <span class="drive-title">acme-logistics / week-24-2026</span>
+    </div>
+    <div class="drive-row">
+      <div>
+        <div class="drive-name">DD-4821_14-06-26.jpg</div>
+        <div class="drive-meta">Photo · 14 Jun 09:42 · J. Smith</div>
+      </div>
+      <span class="drive-badge">Uploaded</span>
+    </div>
+    <div class="drive-row">
+      <div>
+        <div class="drive-name">DD-4821_sig.png</div>
+        <div class="drive-meta">Signature · James Wilson</div>
+      </div>
+      <span class="drive-badge">Uploaded</span>
+    </div>
+    <div class="drive-row">
+      <div>
+        <div class="drive-name">acme-logistics_week-24-2026</div>
+        <div class="drive-meta">Google Sheet · 14 rows · 3 drivers</div>
+      </div>
+      <span class="drive-badge">Live</span>
+    </div>
+  </div>
+</div>
+
+
+<div class="sheet-section" id="sheet">
+  <div class="sheet-section-inner">
+    <div class="sheet-intro">
+      <div class="sheet-intro-copy">
+        <div class="tag">What transport managers actually see</div>
+        <h2>All deliveries.<br>One spreadsheet.<br>Zero effort.</h2>
+        <p>Each time a driver uploads, a new row lands in the weekly Google Sheet — automatically. GPS maps, photos, and signatures are one click away, always there when you need them.</p>
+      </div>
+      <div class="sheet-pills">
+        <div class="sheet-pill"><span class="sheet-pill-dot" style="background:#1a73e8;"></span>Clickable GPS maps</div>
+        <div class="sheet-pill"><span class="sheet-pill-dot" style="background:#34a853;"></span>Photo links</div>
+        <div class="sheet-pill"><span class="sheet-pill-dot" style="background:#ea4335;"></span>Signature links</div>
+        <div class="sheet-pill"><span class="sheet-pill-dot" style="background:#fbbc04;"></span>All drivers, one sheet</div>
+      </div>
+    </div>
+
+    <div class="sheet-wrap">
+      <!-- Chrome bar -->
+      <div class="sheet-chrome">
+        <div class="sheet-chrome-dots">
+          <div class="sheet-chrome-dot" style="background:#ff5f57;"></div>
+          <div class="sheet-chrome-dot" style="background:#febc2e;"></div>
+          <div class="sheet-chrome-dot" style="background:#28c840;"></div>
+        </div>
+        <div class="sheet-chrome-title">
+          <svg class="sheet-chrome-icon" viewBox="0 0 24 24" fill="none">
+            <rect x="3" y="3" width="18" height="18" rx="2" fill="#34a853"/>
+            <rect x="7" y="7" width="4" height="2" fill="white" opacity="0.9"/>
+            <rect x="13" y="7" width="4" height="2" fill="white" opacity="0.9"/>
+            <rect x="7" y="11" width="4" height="2" fill="white" opacity="0.9"/>
+            <rect x="13" y="11" width="4" height="2" fill="white" opacity="0.9"/>
+            <rect x="7" y="15" width="4" height="2" fill="white" opacity="0.9"/>
+            <rect x="13" y="15" width="4" height="2" fill="white" opacity="0.9"/>
+          </svg>
+          acme-logistics_week-24-2026 — Google Sheets
+        </div>
+      </div>
+      <!-- Tab bar -->
+      <div class="sheet-tab-bar">
+        <div class="sheet-tab">acme-logistics_week-24-2026</div>
+      </div>
+      <!-- Table -->
+      <div style="overflow-x:auto;">
+        <table class="gs-table">
+          <thead>
+            <tr>
+              <th class="gs-col-header"></th>
+              <th class="gs-col-header">A</th>
+              <th class="gs-col-header">B</th>
+              <th class="gs-col-header">C</th>
+              <th class="gs-col-header">D</th>
+              <th class="gs-col-header">E</th>
+              <th class="gs-col-header">F</th>
+              <th class="gs-col-header">G</th>
+            </tr>
+            <tr>
+              <td class="gs-row-num">1</td>
+              <th class="gs-th gs-frozen">Order Number</th>
+              <th class="gs-th gs-frozen">Date / Time</th>
+              <th class="gs-th gs-frozen">Driver</th>
+              <th class="gs-th gs-frozen">GPS Link</th>
+              <th class="gs-th gs-frozen">Photo Link</th>
+              <th class="gs-th gs-frozen">Signee Name</th>
+              <th class="gs-th gs-frozen">Signature Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="gs-row-num">2</td>
+              <td class="gs-td">DD-4821</td>
+              <td class="gs-td">14/06/2026 09:42</td>
+              <td class="gs-td">J. Smith</td>
+              <td class="gs-td alt"><a class="gs-link" href="#">📍 View on Maps</a></td>
+              <td class="gs-td alt"><a class="gs-link" href="#">📸 View Photo</a></td>
+              <td class="gs-td">James Wilson</td>
+              <td class="gs-td alt"><a class="gs-link" href="#">✍️ View Signature</a></td>
+            </tr>
+            <tr class="even">
+              <td class="gs-row-num">3</td>
+              <td class="gs-td">DD-4822</td>
+              <td class="gs-td">14/06/2026 10:15</td>
+              <td class="gs-td">J. Smith</td>
+              <td class="gs-td alt"><a class="gs-link" href="#">📍 View on Maps</a></td>
+              <td class="gs-td alt"><a class="gs-link" href="#">📸 View Photo</a></td>
+              <td class="gs-td">Sarah Clarke</td>
+              <td class="gs-td alt"><a class="gs-link" href="#">✍️ View Signature</a></td>
+            </tr>
+            <tr>
+              <td class="gs-row-num">4</td>
+              <td class="gs-td">DD-4823</td>
+              <td class="gs-td">14/06/2026 11:03</td>
+              <td class="gs-td">M. Davis</td>
+              <td class="gs-td alt"><a class="gs-link" href="#">📍 View on Maps</a></td>
+              <td class="gs-td alt"><a class="gs-link" href="#">📸 View Photo</a></td>
+              <td class="gs-td">Robert Hughes</td>
+              <td class="gs-td alt"><a class="gs-link" href="#">✍️ View Signature</a></td>
+            </tr>
+            <tr class="even">
+              <td class="gs-row-num">5</td>
+              <td class="gs-td">DD-4824</td>
+              <td class="gs-td">14/06/2026 12:28</td>
+              <td class="gs-td">M. Davis</td>
+              <td class="gs-td alt"><a class="gs-link" href="#">📍 View on Maps</a></td>
+              <td class="gs-td alt"><a class="gs-link" href="#">📸 View Photo</a></td>
+              <td class="gs-td">Emma Thompson</td>
+              <td class="gs-td alt"><a class="gs-link" href="#">✍️ View Signature</a></td>
+            </tr>
+            <tr>
+              <td class="gs-row-num">6</td>
+              <td class="gs-td">DD-4825</td>
+              <td class="gs-td">14/06/2026 14:05</td>
+              <td class="gs-td">K. Patel</td>
+              <td class="gs-td alt"><a class="gs-link" href="#">📍 View on Maps</a></td>
+              <td class="gs-td alt"><a class="gs-link" href="#">📸 View Photo</a></td>
+              <td class="gs-td">David Marsh</td>
+              <td class="gs-td alt"><a class="gs-link" href="#">✍️ View Signature</a></td>
+            </tr>
+            <tr class="even">
+              <td class="gs-row-num">7</td>
+              <td class="gs-td">DD-4826</td>
+              <td class="gs-td">14/06/2026 14:52</td>
+              <td class="gs-td">K. Patel</td>
+              <td class="gs-td alt"><a class="gs-link" href="#">📍 View on Maps</a></td>
+              <td class="gs-td alt"><a class="gs-link" href="#">📸 View Photo</a></td>
+              <td class="gs-td">Fiona Garrett</td>
+              <td class="gs-td alt"><a class="gs-link" href="#">✍️ View Signature</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="for-section" id="who">
+  <div class="tag">Built for the road, not the boardroom</div>
+  <h2>Made for operators who move things,<br>not manage software.</h2>
+  <div class="for-grid">
+    <div class="for-card">
+      <span class="for-icon">🚛</span>
+      <div class="for-title">Hauliers</div>
+      <div class="for-desc">Multiple drivers, one shared record every manager can see.</div>
+    </div>
+    <div class="for-card">
+      <span class="for-icon">📦</span>
+      <div class="for-title">Courier companies</div>
+      <div class="for-desc">Fast turnaround deliveries with proof captured in seconds.</div>
+    </div>
+    <div class="for-card">
+      <span class="for-icon">🏗️</span>
+      <div class="for-title">Builders merchants</div>
+      <div class="for-desc">Site drops and trade deliveries, signed for on arrival.</div>
+    </div>
+    <div class="for-card">
+      <span class="for-icon">🚚</span>
+      <div class="for-title">Local delivery fleets</div>
+      <div class="for-desc">Small teams who need reliable records without enterprise tools.</div>
+    </div>
+  </div>
+</div>
+
+<div class="compare-section">
+  <div class="compare-inner">
+    <div class="tag">Before and after</div>
+    <h2>Stop chasing drivers for delivery notes.</h2>
+    <div class="compare-table">
+      <div class="compare-col-head without">Without Ullr</div>
+      <div class="compare-col-head with">With Ullr</div>
+      <div class="compare-cell without">Paper delivery notes</div>
+      <div class="compare-cell with">Digital records, every time</div>
+      <div class="compare-cell without">Photos scattered across WhatsApp</div>
+      <div class="compare-cell with">Organised automatically by company</div>
+      <div class="compare-cell without">Signatures missing or illegible</div>
+      <div class="compare-cell with">Signature captured on every delivery</div>
+      <div class="compare-cell without">Paperwork lost or left in the cab</div>
+      <div class="compare-cell with">Everything searchable in one sheet</div>
+      <div class="compare-cell without">Manual end-of-week filing</div>
+      <div class="compare-cell with">Rows appear automatically as drivers upload</div>
+    </div>
+  </div>
+</div>
+
+<div class="faq-section" id="faq">
+  <div class="tag">Questions</div>
+  <h2>Frequently asked</h2>
+
+  <div class="faq-item">
+    <button class="faq-q">Do drivers need to install an app?<span class="faq-q-mark">+</span></button>
+    <div class="faq-a">No. It runs in the browser on any phone — nothing to download or update.</div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q">Does it work on iPhone and Android?<span class="faq-q-mark">+</span></button>
+    <div class="faq-a">Yes, both. As long as the driver has a camera and a browser, they're set up.</div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q">Can multiple drivers use it?<span class="faq-q-mark">+</span></button>
+    <div class="faq-a">As many as you like. Every driver's deliveries feed into the same weekly company sheet.</div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q">Where are the photos and signatures stored?<span class="faq-q-mark">+</span></button>
+    <div class="faq-a">In a Google Drive folder set up just for your company, which you're given access to — so you can always find, open, and download your own records.</div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q">How long does setup take?<span class="faq-q-mark">+</span></button>
+    <div class="faq-a">Usually under ten minutes. Get in touch and we'll get your team added.</div>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('.faq-q').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    btn.parentElement.classList.toggle('open');
+  });
+});
+</script>
+
+<div class="cta" id="access">
+  <span class="cta-tag">No card. No catch.</span>
+  <h2 class="cta-title">Try it for free.</h2>
+  <p class="cta-sub">Try Ullr across your whole team, no cost while you see if it fits.</p>
+  <div class="email-row">
+    <input class="email-input" type="email" placeholder="your@company.com">
+    <a class="btn-primary" href="mailto:ullrsystem@gmail.com">Request Access</a>
+  </div>
+  <p class="small-note">We'll get back to you within 24 hours to get you set up.</p>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <span class="footer-logo">Ullr System</span>
+    <span class="footer-copy">Proof of delivery, properly done.</span>
+  </div>
+  <div class="footer-legal">Ullr System is provided as-is, without warranty of any kind, and is used at your own risk. See our <a href="terms.html">Terms &amp; Conditions</a>.</div>
+</footer>
+
+</body>
+</html>
