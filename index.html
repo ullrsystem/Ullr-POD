@@ -1,0 +1,2051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="apple-touch-icon" href="data:image/png;base64,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">
+    <link rel="icon" type="image/png" sizes="512x512" href="data:image/png;base64,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">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Ullr">
+    <meta name="theme-color" content="#0a0c10">
+    <title>Ullr System — Proof of Delivery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void:       #0a0c10;
+            --void-2:     #12151c;
+            --void-3:     #1c2030;
+            --steel:      #2a2f3d;
+            --steel-2:    #363d50;
+            --mist:       #8892a4;
+            --fog:        #c4cad6;
+            --white:      #f0f4ff;
+            --ice:        #e8edf5;
+            --signal:     #3b82f6;
+            --signal-dk:  #2563eb;
+            --signal-glow:rgba(59,130,246,0.15);
+            --go:         #10b981;
+            --go-dk:      #059669;
+            --warn:       #f59e0b;
+            --danger:     #ef4444;
+            --radius:     14px;
+            --radius-sm:  10px;
+            --radius-xs:  7px;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--void);
+            min-height: 100vh;
+            color: var(--white);
+            padding-bottom: 40px;
+        }
+
+        #accessGate {
+            position: fixed; inset: 0; z-index: 9999;
+            background: var(--void);
+            display: flex; align-items: center; justify-content: center;
+            padding: 24px;
+        }
+        .gate-inner {
+            background: var(--void-2);
+            border: 1px solid var(--steel);
+            border-radius: 20px;
+            padding: 48px 32px 40px;
+            max-width: 380px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .gate-inner::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--signal), transparent);
+        }
+        .gate-logo {
+            width: 56px; height: 56px;
+            margin: 0 auto 24px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .gate-inner h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+        .gate-sub {
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--mist);
+            margin-bottom: 32px;
+        }
+        .gate-inner p {
+            font-size: 13px;
+            color: var(--mist);
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+        #gateSignInBtn {
+            width: 100%;
+            padding: 15px;
+            background: var(--signal);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Syne', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        #gateSignInBtn:hover { background: var(--signal-dk); transform: translateY(-1px); }
+        #gateError {
+            display: none;
+            margin-top: 16px;
+            padding: 12px 14px;
+            background: rgba(239,68,68,0.1);
+            color: #fca5a5;
+            border: 1px solid rgba(239,68,68,0.2);
+            border-radius: var(--radius-xs);
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        .app-header {
+            background: var(--void-2);
+            border-bottom: 1px solid var(--steel);
+            padding: 0 20px;
+            display: flex;
+            align-items: stretch;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .header-logo-wrap {
+            display: flex;
+            align-items: center;
+            padding: 14px 16px 14px 0;
+            border-right: 1px solid var(--steel);
+            margin-right: 16px;
+        }
+        .header-logo-wrap svg { width: 28px; height: 28px; }
+        .header-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex: 1;
+            padding: 12px 0;
+        }
+        .header-text h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 17px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--white);
+            line-height: 1;
+        }
+        .header-text .subtitle {
+            font-size: 9px;
+            font-weight: 500;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--mist);
+            margin-top: 4px;
+        }
+        .header-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: center;
+            padding-left: 16px;
+            border-left: 1px solid var(--steel);
+        }
+        .header-badge .num {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 30px;
+            font-weight: 600;
+            color: var(--signal);
+            line-height: 1;
+            letter-spacing: -1px;
+        }
+        .header-badge .lbl {
+            font-size: 8px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--mist);
+            margin-top: 3px;
+        }
+
+        .status-bar {
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--steel);
+            background: var(--void-2);
+        }
+        #companyLabel {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--mist);
+            font-family: 'DM Mono', monospace;
+        }
+        .google-connected {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 11px; font-weight: 500; color: var(--go);
+        }
+        .google-connected::before {
+            content: ''; width: 6px; height: 6px;
+            border-radius: 50%; background: var(--go);
+            display: inline-block;
+            box-shadow: 0 0 6px var(--go);
+        }
+        .google-disconnected {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 11px; font-weight: 500; color: var(--mist);
+        }
+        .google-disconnected::before {
+            content: ''; width: 6px; height: 6px;
+            border-radius: 50%; background: var(--steel-2);
+            display: inline-block;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        .success-message, .error-message {
+            display: none;
+            padding: 13px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 500;
+            margin: 12px 0 0;
+            line-height: 1.4;
+        }
+        .success-message {
+            background: rgba(16,185,129,0.1);
+            color: #6ee7b7;
+            border: 1px solid rgba(16,185,129,0.2);
+        }
+        .error-message {
+            background: rgba(239,68,68,0.1);
+            color: #fca5a5;
+            border: 1px solid rgba(239,68,68,0.2);
+        }
+
+        .upload-progress {
+            display: none;
+            padding: 14px 16px;
+            background: var(--void-3);
+            border: 1px solid var(--signal);
+            border-radius: var(--radius-sm);
+            margin: 12px 0 0;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--white);
+        }
+        .progress-bar {
+            background: var(--steel);
+            border-radius: 99px;
+            height: 3px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--signal);
+            border-radius: 99px;
+            transition: width 0.3s ease;
+            width: 0%;
+            box-shadow: 0 0 8px var(--signal);
+        }
+        #progressText {
+            margin-top: 8px;
+            font-size: 11px;
+            color: var(--mist);
+        }
+
+        .form-card {
+            background: var(--void-2);
+            border: 1px solid var(--steel);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-top: 16px;
+        }
+        .field-label {
+            display: block;
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--mist);
+            margin-bottom: 8px;
+        }
+        .field-input {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--void-3);
+            border: 1px solid var(--steel);
+            border-radius: var(--radius-sm);
+            font-family: 'DM Mono', monospace;
+            font-size: 16px;
+            color: var(--white);
+            outline: none;
+            transition: border-color 0.15s, box-shadow 0.15s;
+            -webkit-appearance: none;
+        }
+        .field-input::placeholder { color: var(--steel-2); }
+        .field-input:focus {
+            border-color: var(--signal);
+            box-shadow: 0 0 0 3px var(--signal-glow);
+        }
+
+        .camera-section { margin-top: 16px; }
+        #cameraBtn {
+            width: 100%;
+            padding: 20px;
+            background: var(--void-3);
+            border: 1px dashed var(--steel-2);
+            border-radius: var(--radius-sm);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--mist);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        #cameraBtn:hover { border-color: var(--signal); color: var(--signal); background: var(--signal-glow); }
+        #camera-input { display: none; }
+
+        .preview {
+            margin-top: 12px;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            border: 1px solid var(--steel);
+            position: relative;
+        }
+        .preview img { width: 100%; max-height: 220px; object-fit: cover; display: block; }
+        .preview-badge {
+            position: absolute;
+            top: 10px; right: 10px;
+            background: rgba(10,12,16,0.8);
+            border: 1px solid var(--steel);
+            border-radius: 6px;
+            padding: 4px 8px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--go);
+            backdrop-filter: blur(8px);
+        }
+        .hidden { display: none !important; }
+
+        .gps-pill {
+            margin-top: 10px;
+            padding: 9px 14px;
+            background: rgba(16,185,129,0.08);
+            border: 1px solid rgba(16,185,129,0.2);
+            border-radius: var(--radius-xs);
+            font-size: 11px;
+            font-weight: 500;
+            color: #6ee7b7;
+            font-family: 'DM Mono', monospace;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sig-trigger-btn {
+            width: 100%;
+            margin-top: 12px;
+            padding: 15px;
+            background: var(--void-3);
+            border: 1px dashed var(--steel-2);
+            border-radius: var(--radius-sm);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--mist);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .sig-trigger-btn:hover { border-color: var(--signal); color: var(--signal); background: var(--signal-glow); }
+        .sig-trigger-btn.sig-done {
+            border-style: solid;
+            border-color: rgba(16,185,129,0.35);
+            background: rgba(16,185,129,0.07);
+            color: #6ee7b7;
+        }
+        .sig-trigger-btn.sig-done:hover {
+            border-color: rgba(16,185,129,0.6);
+            background: rgba(16,185,129,0.13);
+            color: #6ee7b7;
+        }
+
+        #sigModal {
+            display: none;
+            position: fixed; inset: 0;
+            z-index: 2000;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+        }
+        #sigModal.open { display: flex; }
+        .sig-modal-inner {
+            background: var(--void-2);
+            border: 1px solid var(--steel);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 480px;
+            margin: 0 16px;
+            max-height: 92vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            animation: sig-slide-up 0.25s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        @keyframes sig-slide-up {
+            from { opacity: 0; transform: translateY(40px) scale(0.97); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .sig-modal-header {
+            padding: 20px 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .sig-modal-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--white);
+        }
+        .sig-modal-close {
+            width: 32px; height: 32px;
+            background: var(--steel);
+            border: none; border-radius: 50%;
+            color: var(--mist);
+            font-size: 14px;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.15s;
+        }
+        .sig-modal-close:hover { background: var(--steel-2); color: var(--white); }
+        .sig-modal-order {
+            padding: 6px 20px 16px;
+            font-size: 11px;
+            font-family: 'DM Mono', monospace;
+            color: var(--mist);
+        }
+        .sig-modal-order span { color: var(--signal); font-weight: 600; }
+        .sig-canvas-area {
+            margin: 0 20px;
+            position: relative;
+            background: #ffffff;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            touch-action: none;
+        }
+        #sigCanvas { display: block; width: 100%; height: 360px; max-height: 45vh; cursor: crosshair; }
+        .sig-baseline {
+            position: absolute;
+            bottom: 40px; left: 16px; right: 16px;
+            height: 1px;
+            background: rgba(0,0,0,0.12);
+            pointer-events: none;
+        }
+        .sig-hint-overlay {
+            position: absolute; inset: 0;
+            display: flex; align-items: center; justify-content: center;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        .sig-hint-overlay span {
+            font-size: 12px;
+            color: rgba(0,0,0,0.25);
+            font-family: 'DM Mono', monospace;
+            letter-spacing: 1px;
+        }
+        .sig-modal-clear {
+            position: absolute;
+            top: 8px; right: 8px;
+            padding: 5px 11px;
+            background: rgba(10,12,16,0.5);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.7);
+            cursor: pointer;
+            backdrop-filter: blur(6px);
+            transition: background 0.15s;
+        }
+        .sig-modal-clear:hover { background: rgba(239,68,68,0.55); color: #fff; }
+        .sig-name-row { padding: 14px 20px 0; }
+        .privacy-link {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--mist);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            font-family: 'DM Sans', sans-serif;
+            transition: color 0.15s;
+        }
+        .privacy-link:hover { color: var(--fog); }
+
+        #privacyModal {
+            display: none;
+            position: fixed; inset: 0;
+            z-index: 3000;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+        }
+        #privacyModal.open { display: flex; }
+        .privacy-modal-inner {
+            background: var(--void-2);
+            border: 1px solid var(--steel);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 480px;
+            margin: 0 16px;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            animation: sig-slide-up 0.25s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        .privacy-modal-header {
+            padding: 20px 20px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--steel);
+            flex-shrink: 0;
+        }
+        .privacy-modal-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--white);
+        }
+        .privacy-modal-close {
+            width: 32px; height: 32px;
+            background: var(--steel);
+            border: none; border-radius: 50%;
+            color: var(--mist);
+            font-size: 14px;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.15s;
+            flex-shrink: 0;
+        }
+        .privacy-modal-close:hover { background: var(--steel-2); color: var(--white); }
+        .privacy-modal-body {
+            padding: 20px;
+            overflow-y: auto;
+            font-size: 13px;
+            color: var(--fog);
+            line-height: 1.7;
+        }
+        .privacy-modal-body h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--white);
+            margin: 20px 0 8px;
+        }
+        .privacy-modal-body h3:first-child { margin-top: 0; }
+        .privacy-modal-body p { margin-bottom: 8px; }
+        .privacy-modal-body ul { padding-left: 18px; margin-bottom: 8px; }
+        .privacy-modal-body li { margin-bottom: 4px; }
+        .privacy-modal-body a { color: var(--signal); }
+        .privacy-modal-version {
+            padding: 12px 20px;
+            border-top: 1px solid var(--steel);
+            font-size: 10px;
+            color: var(--mist);
+            font-family: 'DM Mono', monospace;
+            flex-shrink: 0;
+        }
+        .sig-privacy-notice {
+            margin: 10px 20px 0;
+            padding: 10px 12px;
+            background: rgba(136,146,164,0.08);
+            border: 1px solid var(--steel);
+            border-radius: var(--radius-xs);
+            font-size: 11px;
+            color: var(--mist);
+            line-height: 1.5;
+            text-align: center;
+        }
+        .sig-modal-actions {
+            padding: 14px 20px 24px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 10px;
+        }
+        .sig-cancel-btn {
+            padding: 14px;
+            background: transparent;
+            border: 1px solid var(--steel);
+            border-radius: var(--radius-sm);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--mist);
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .sig-cancel-btn:hover { background: var(--void-3); color: var(--fog); }
+        .sig-confirm-btn {
+            padding: 14px;
+            background: var(--go);
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Syne', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .sig-confirm-btn:hover:not(:disabled) {
+            background: var(--go-dk);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(16,185,129,0.35);
+        }
+        .sig-confirm-btn:disabled { background: var(--steel); color: var(--mist); cursor: not-allowed; }
+
+        #formChecklist {
+            display: flex;
+            gap: 6px;
+            margin-top: 12px;
+            padding: 10px 14px;
+            background: var(--void-3);
+            border: 1px solid var(--steel);
+            border-radius: var(--radius-sm);
+        }
+        .check-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        .check-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--steel-2);
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        .check-item.done .check-dot { background: var(--go); box-shadow: 0 0 6px rgba(16,185,129,0.5); }
+        .check-text {
+            font-size: 9px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: var(--steel-2);
+            text-align: center;
+            transition: color 0.2s;
+        }
+        .check-item.done .check-text { color: var(--go); }
+
+        #saveBtn {
+            width: 100%;
+            padding: 17px;
+            background: var(--signal);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Syne', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 16px;
+        }
+        #saveBtn:hover:not(:disabled) {
+            background: var(--signal-dk);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(59,130,246,0.4);
+        }
+        #saveBtn:disabled { background: var(--steel); color: var(--mist); cursor: not-allowed; transform: none; box-shadow: none; }
+
+        .action-buttons { margin-top: 10px; }
+        #optionsBtn {
+            width: 100%;
+            padding: 13px;
+            background: transparent;
+            border: 1px solid var(--steel);
+            border-radius: var(--radius-sm);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--mist);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        #optionsBtn:hover { border-color: var(--steel-2); color: var(--fog); background: var(--void-3); }
+
+        .options-sheet {
+            background: var(--void-2);
+            border: 1px solid var(--steel);
+            border-bottom: none;
+            border-radius: 20px 20px 0 0;
+            padding: 8px 20px 32px;
+            width: 100%;
+            max-width: 480px;
+        }
+        .options-handle {
+            width: 36px; height: 4px;
+            background: var(--steel);
+            border-radius: 99px;
+            margin: 12px auto 20px;
+        }
+        .options-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .options-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--white);
+        }
+        #optionsCloseBtn {
+            width: 32px; height: 32px;
+            background: var(--steel);
+            border: none; border-radius: 50%;
+            color: var(--mist);
+            font-size: 14px;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.15s;
+        }
+        #optionsCloseBtn:hover { background: var(--steel-2); color: var(--white); }
+
+        .options-grid { display: grid; gap: 10px; }
+        .opt-btn {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid var(--steel);
+            border-radius: var(--radius-sm);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-align: left;
+        }
+        .opt-btn .opt-icon {
+            width: 36px; height: 36px;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        .opt-btn .opt-text { flex: 1; }
+        .opt-btn .opt-label { display: block; font-size: 14px; font-weight: 600; color: var(--white); }
+        .opt-btn .opt-desc { display: block; font-size: 11px; font-weight: 400; color: var(--mist); margin-top: 1px; }
+        .opt-btn-upload { background: rgba(16,185,129,0.08); border-color: rgba(16,185,129,0.25); }
+        .opt-btn-upload:hover { background: rgba(16,185,129,0.14); border-color: rgba(16,185,129,0.4); }
+        .opt-btn-upload .opt-icon { background: rgba(16,185,129,0.15); }
+        .opt-btn-export { background: rgba(59,130,246,0.08); border-color: rgba(59,130,246,0.2); }
+        .opt-btn-export:hover { background: rgba(59,130,246,0.14); border-color: rgba(59,130,246,0.35); }
+        .opt-btn-export .opt-icon { background: rgba(59,130,246,0.15); }
+        .opt-btn-view { background: var(--void-3); }
+        .opt-btn-view:hover { background: var(--steel); border-color: var(--steel-2); }
+        .opt-btn-view .opt-icon { background: var(--steel); }
+        .opt-btn-danger { background: rgba(239,68,68,0.06); border-color: rgba(239,68,68,0.2); }
+        .opt-btn-danger:hover { background: rgba(239,68,68,0.12); }
+        .opt-btn-danger .opt-icon { background: rgba(239,68,68,0.12); }
+        .opt-btn-danger .opt-label { color: #fca5a5; }
+
+        .deliveries-list {
+            background: var(--void-2);
+            border: 1px solid var(--steel);
+            border-radius: var(--radius);
+            margin-top: 12px;
+            overflow: hidden;
+        }
+        .delivery-item {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--steel);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .delivery-item:last-child { border-bottom: none; }
+        .delivery-order { font-weight: 600; font-size: 14px; color: var(--white); font-family: 'DM Mono', monospace; }
+        .delivery-time { font-size: 11px; color: var(--mist); margin-top: 3px; font-family: 'DM Mono', monospace; }
+    </style>
+</head>
+<body>
+
+<div id="accessGate">
+    <div class="gate-inner">
+        <div class="gate-logo">
+            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 28 Q28 4 50 8" stroke="#3b82f6" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path d="M8 28 Q8 50 32 52" stroke="#3b82f6" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <line x1="10" y1="46" x2="48" y2="10" stroke="#f0f4ff" stroke-width="1.8" stroke-linecap="round"/>
+                <polygon points="48,10 42,15 46,20" fill="#3b82f6"/>
+                <line x1="10" y1="46" x2="14" y2="38" stroke="#8892a4" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="10" y1="46" x2="18" y2="42" stroke="#8892a4" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <h2>Ullr System</h2>
+        <p class="gate-sub">Proof of Delivery</p>
+        <p>Sign in with your authorised Google account to access the system.</p>
+        <button id="gateSignInBtn">Sign in with Google</button>
+        <div id="gateError"></div>
+    </div>
+</div>
+
+<div class="app-header">
+    <div class="header-logo-wrap">
+        <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 28 Q28 4 50 8" stroke="rgba(59,130,246,0.7)" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <path d="M8 28 Q8 50 32 52" stroke="rgba(59,130,246,0.7)" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <line x1="10" y1="46" x2="48" y2="10" stroke="rgba(240,244,255,0.9)" stroke-width="1.8" stroke-linecap="round"/>
+            <polygon points="48,10 42,15 46,20" fill="#3b82f6"/>
+            <line x1="10" y1="46" x2="14" y2="38" stroke="rgba(136,146,164,0.7)" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="10" y1="46" x2="18" y2="42" stroke="rgba(136,146,164,0.7)" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+    </div>
+    <div class="header-text">
+        <h1>Ullr System</h1>
+        <span class="subtitle">Proof of Delivery</span>
+    </div>
+    <div class="header-badge">
+        <span class="num" id="deliveryCount">0</span>
+        <span class="lbl">Pending</span>
+    </div>
+</div>
+
+<div id="offlineBanner" style="display:none;background:rgba(245,158,11,0.12);border-bottom:1px solid rgba(245,158,11,0.3);color:#fbbf24;text-align:center;padding:10px 16px;font-size:12.5px;font-weight:600;">
+    ⚠️ Not signed in — deliveries are saving on this device only. Sign in to sync them to Drive.
+</div>
+
+<div class="status-bar">
+    <p id="companyLabel">Not signed in</p>
+    <div style="display:flex;align-items:center;gap:12px;">
+        <button class="privacy-link" id="privacyLink">Privacy Notice</button>
+        <div id="googleStatus"><span class="google-disconnected">Not connected</span></div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="success-message" id="successMsg"></div>
+    <div class="error-message" id="errorMsg"></div>
+    <div class="upload-progress" id="uploadProgress">
+        <div>Uploading to Google Drive...</div>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div id="progressText"></div>
+    </div>
+
+    <div class="form-card">
+        <label class="field-label" for="orderNumber">Order Number</label>
+        <input type="text" id="orderNumber" class="field-input" placeholder="Enter order reference" autofocus autocomplete="off">
+
+        <div class="camera-section">
+            <button id="cameraBtn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                Take Photo
+            </button>
+            <input type="file" id="camera-input" accept="image/*" capture="environment">
+            <div class="preview hidden" id="previewSection">
+                <img id="preview-img" alt="Photo preview">
+                <span class="preview-badge">✓ Captured</span>
+            </div>
+            <div class="gps-pill hidden" id="gpsInfo">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.5 8 14 8 14s8-8.5 8-14a8 8 0 0 0-8-8z"/></svg>
+                <span id="gpsCoords">Acquiring location...</span>
+            </div>
+        </div>
+
+        <button class="sig-trigger-btn" id="sigTriggerBtn" type="button" disabled>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            <span id="sigTriggerLabel">Get Signature</span>
+        </button>
+
+        <div id="formChecklist">
+            <div class="check-item" id="check-order">
+                <span class="check-dot"></span>
+                <span class="check-text">Order number</span>
+            </div>
+            <div class="check-item" id="check-photo">
+                <span class="check-dot"></span>
+                <span class="check-text">Photo taken</span>
+            </div>
+            <div class="check-item" id="check-sig">
+                <span class="check-dot"></span>
+                <span class="check-text">Signature captured</span>
+            </div>
+        </div>
+
+        <button id="saveBtn" disabled>Save Delivery</button>
+    </div>
+
+    <div class="action-buttons">
+        <button id="optionsBtn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            Options
+        </button>
+    </div>
+
+    <div id="optionsOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:1000;align-items:flex-end;justify-content:center;">
+        <div class="options-sheet">
+            <div class="options-handle"></div>
+            <div class="options-header">
+                <span class="options-title">Options</span>
+                <button id="optionsCloseBtn">✕</button>
+            </div>
+            <div style="font-size:10px;color:var(--mist);font-family:'DM Mono',monospace;margin:-10px 0 16px;letter-spacing:1px;">Version <span id="versionLabel"></span></div>
+            <div class="options-grid">
+                <button class="opt-btn opt-btn-upload hidden" id="uploadDriveBtn">
+                    <div class="opt-icon">☁️</div>
+                    <div class="opt-text">
+                        <span class="opt-label">Upload to Drive</span>
+                        <span class="opt-desc">Sync deliveries to Google Drive</span>
+                    </div>
+                </button>
+                <button class="opt-btn opt-btn-export" id="exportBtn">
+                    <div class="opt-icon">📊</div>
+                    <div class="opt-text">
+                        <span class="opt-label">Export to Excel</span>
+                        <span class="opt-desc">Download local backup</span>
+                    </div>
+                </button>
+                <button class="opt-btn opt-btn-view" id="viewBtn">
+                    <div class="opt-icon">📋</div>
+                    <div class="opt-text">
+                        <span class="opt-label">View All</span>
+                        <span class="opt-desc">Browse saved deliveries</span>
+                    </div>
+                </button>
+                <button class="opt-btn opt-btn-danger" id="signOutBtn">
+                    <div class="opt-icon">🚪</div>
+                    <div class="opt-text">
+                        <span class="opt-label">Sign Out</span>
+                        <span class="opt-desc">End current session</span>
+                    </div>
+                </button>
+                <button class="opt-btn opt-btn-view hidden" id="signInBtn">
+                    <div class="opt-icon">🔐</div>
+                    <div class="opt-text">
+                        <span class="opt-label">Sign in with Google</span>
+                        <span class="opt-desc">Connect to Drive</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="deliveries-list hidden" id="deliveriesList"></div>
+</div>
+
+<div id="sigModal">
+    <div class="sig-modal-inner">
+        <div class="sig-modal-header">
+            <span class="sig-modal-title">Customer Signature</span>
+            <button class="sig-modal-close" id="sigModalClose">✕</button>
+        </div>
+        <div class="sig-modal-order">Order <span id="sigModalOrderRef">—</span></div>
+        <div class="sig-canvas-area">
+            <canvas id="sigCanvas"></canvas>
+            <div class="sig-baseline"></div>
+            <div class="sig-hint-overlay" id="sigHintOverlay">
+                <span>Sign here with finger or stylus</span>
+            </div>
+            <button class="sig-modal-clear" id="sigModalClear" type="button">Clear</button>
+        </div>
+        <div class="sig-name-row">
+            <label class="field-label" for="sigName">Signee Name</label>
+            <input type="text" id="sigName" class="field-input" placeholder="Type full name" autocomplete="off">
+        </div>
+        <div class="sig-privacy-notice">
+            By signing, you confirm receipt of this delivery. Your name and signature will be stored securely for up to 12 months as proof of delivery.
+        </div>
+        <div class="sig-modal-actions">
+            <button class="sig-cancel-btn" id="sigCancelBtn">Cancel</button>
+            <button class="sig-confirm-btn" id="sigConfirmBtn" disabled>Confirm Signature</button>
+        </div>
+    </div>
+</div>
+
+<div id="privacyModal">
+    <div class="privacy-modal-inner">
+        <div class="privacy-modal-header">
+            <span class="privacy-modal-title">Privacy Notice</span>
+            <button class="privacy-modal-close" id="privacyModalClose">✕</button>
+        </div>
+        <div class="privacy-modal-body">
+            <h3>Who this notice is for</h3>
+            <p>This notice applies to anyone who uses the Ullr System proof of delivery application as a driver or delivery operative. It explains what personal data the app collects about you, why, and what happens to it.</p>
+
+            <h3>Who controls your data</h3>
+            <p>The Ullr System is operated by the company or individual who has deployed this application to you (your "operator"). Your operator is the data controller responsible for your personal data. If you have questions about your data, contact your operator directly.</p>
+
+            <h3>What data we collect about you</h3>
+            <ul>
+                <li><strong style="color:var(--white);">Your name and email address</strong> — used to verify your access and identify deliveries you have made</li>
+                <li><strong style="color:var(--white);">GPS location</strong> — recorded at the time each photo is taken, to confirm where a delivery was made</li>
+                <li><strong style="color:var(--white);">Photos</strong> — images of delivery documentation captured through the app</li>
+                <li><strong style="color:var(--white);">Date and time</strong> — the timestamp of each delivery you record</li>
+            </ul>
+
+            <h3>Why we collect it</h3>
+            <p>This data is collected to provide proof of delivery records on behalf of your operator. The lawful basis is legitimate interests — specifically, the legitimate interest of your operator and their customers in having accurate delivery records.</p>
+            <p>If you are engaged as a contractor or self-employed driver, this notice forms part of your understanding of how your data will be used in connection with that work.</p>
+
+            <h3>Where your data is stored</h3>
+            <p>Data is stored in two places:</p>
+            <ul>
+                <li><strong style="color:var(--white);">On your device</strong> — temporarily in the app's local storage until you upload</li>
+                <li><strong style="color:var(--white);">Google Drive</strong> — once uploaded, delivery records and photos are stored in a Google Drive folder controlled by your operator</li>
+            </ul>
+            <p>Google's infrastructure may process data outside the UK or EEA. This is covered by Google's standard data processing terms and transfer mechanisms.</p>
+
+            <h3>How long we keep it</h3>
+            <p>Your delivery records are kept for <strong style="color:var(--white);">12 months</strong> from the date they are created, after which they will be deleted. Data stored locally on your device is automatically purged after 30 days.</p>
+
+            <h3>Who can see your data</h3>
+            <ul>
+                <li>Your operator and any staff they authorise</li>
+                <li>No data is sold or shared with third parties for marketing purposes</li>
+            </ul>
+
+            <h3>Your rights</h3>
+            <p>Under UK GDPR you have the right to access, correct, or request deletion of your personal data, and to object to processing in certain circumstances. To exercise any of these rights, contact your operator. If you are unsatisfied with their response, you can contact the Information Commissioner's Office at <a href="https://ico.org.uk" target="_blank">ico.org.uk</a>.</p>
+        </div>
+        <div class="privacy-modal-version">Version 1.0 — 25 June 2026</div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script>
+    // ── App Version ────────────────────────────────────────────────────
+    const APP_VERSION = '2.4';
+
+    // ── Config ─────────────────────────────────────────────────────────
+    // SECRET has been removed from the frontend entirely.
+    // The Cloudflare Worker authenticates requests using the Google OAuth
+    // access token sent in the Authorization header, and holds the Apps
+    // Script secret in its own environment variables.
+    const CLIENT_ID = '748854288515-9f4gpar0877eca3uteg501tr88qn2fkf.apps.googleusercontent.com';
+    const SCOPES    = 'https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/userinfo.email';
+    const PROXY_URL = 'https://ullr-proxy.ullrsystem.workers.dev';
+
+    // interactiveTokenClient drives the visible "Sign in" buttons (shows a
+    // Google account picker). silentTokenClient is used only for background
+    // refreshes and never shows anything to the person — see ensureFreshToken()
+    // further down for the one place that decides which is used when.
+    let interactiveTokenClient;
+    let silentTokenClient;
+    let pendingSilentRefreshResolve = null;
+    let accessToken = null;
+    let gapiInited  = false;
+    let currentUser = null;
+
+    // ── Authenticated fetch helper ──────────────────────────────────────
+    // All requests to the Worker are authenticated with the Google OAuth
+    // token in the Authorization header. No shared secret is sent from
+    // the browser.
+    function proxyFetch(body) {
+        return fetch(PROXY_URL, {
+            method:  'POST',
+            headers: {
+                'Content-Type':  'application/json',
+                'Authorization': 'Bearer ' + accessToken,
+            },
+            body: JSON.stringify(body),
+        });
+    }
+
+    let currentDelivery = {
+        orderNumber: '', photo: null, photoName: '',
+        latitude: null, longitude: null,
+        timestamp: null, signature: null, signeeName: ''
+    };
+
+    const DRAFT_KEY = 'deliveryDraft';
+
+    // Persists the in-progress delivery to localStorage so it survives a
+    // reload (e.g. a forced sign-out after a token error). Only the order
+    // number field isn't part of currentDelivery, so it's read separately.
+    function saveDraft() {
+        try {
+            const draft = {
+                ...currentDelivery,
+                orderNumber: document.getElementById('orderNumber').value,
+                sigDone: document.getElementById('sigTriggerBtn').classList.contains('sig-done'),
+            };
+            localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+        } catch (e) {
+            // Storage full or unavailable — draft saving is best-effort,
+            // don't interrupt the person's workflow over it.
+            console.error('Could not save draft:', e);
+        }
+    }
+
+    function clearDraft() {
+        localStorage.removeItem(DRAFT_KEY);
+    }
+
+    function loadDraft() {
+        try {
+            const raw = localStorage.getItem(DRAFT_KEY);
+            return raw ? JSON.parse(raw) : null;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    // Rebuilds the form UI from a saved draft on app load.
+    function restoreDraft(draft) {
+        currentDelivery = {
+            orderNumber: draft.orderNumber || '',
+            photo: draft.photo || null,
+            photoName: draft.photoName || '',
+            latitude: draft.latitude ?? null,
+            longitude: draft.longitude ?? null,
+            timestamp: draft.timestamp || null,
+            signature: draft.signature || null,
+            signeeName: draft.signeeName || '',
+        };
+        document.getElementById('orderNumber').value = currentDelivery.orderNumber;
+
+        if (currentDelivery.photo) {
+            document.getElementById('preview-img').src = currentDelivery.photo;
+            document.getElementById('previewSection').classList.remove('hidden');
+            document.getElementById('sigTriggerBtn').disabled = false;
+        }
+        if (currentDelivery.latitude && currentDelivery.longitude) {
+            document.getElementById('gpsInfo').classList.remove('hidden');
+            document.getElementById('gpsCoords').textContent =
+                `${currentDelivery.latitude.toFixed(6)}, ${currentDelivery.longitude.toFixed(6)}`;
+        }
+        if (currentDelivery.signature && currentDelivery.signeeName) {
+            const btn = document.getElementById('sigTriggerBtn');
+            btn.classList.add('sig-done');
+            document.getElementById('sigTriggerLabel').textContent = `✓ Signed — ${currentDelivery.signeeName}`;
+        }
+        checkFormComplete();
+        showMessage('success', 'Restored your in-progress delivery.');
+    }
+
+    function resetForm() {
+        currentDelivery = {
+            orderNumber: '', photo: null, photoName: '',
+            latitude: null, longitude: null,
+            timestamp: null, signature: null, signeeName: ''
+        };
+        clearDraft();
+        document.getElementById('orderNumber').value = '';
+        const cameraInput = document.getElementById('camera-input');
+        cameraInput.removeEventListener('change', handlePhotoCapture);
+        const newInput = cameraInput.cloneNode(true);
+        cameraInput.parentNode.replaceChild(newInput, cameraInput);
+        newInput.addEventListener('change', handlePhotoCapture);
+        document.getElementById('previewSection').classList.add('hidden');
+        document.getElementById('preview-img').src = '';
+        document.getElementById('gpsInfo').classList.add('hidden');
+        document.getElementById('gpsCoords').textContent = 'Waiting...';
+        if (typeof resetSigModal === 'function') resetSigModal();
+        document.getElementById('sigTriggerBtn').disabled = true;
+        const saveBtn = document.getElementById('saveBtn');
+        saveBtn.disabled = true;
+        saveBtn.style.opacity = '0.5';
+        saveBtn.style.cursor = 'not-allowed';
+    }
+
+    function gapiLoaded() { gapi.load('client', initializeGapiClient); }
+
+    async function initializeGapiClient() {
+        await gapi.client.init({ discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'] });
+        gapiInited = true;
+    }
+
+    // Sets up Google sign-in once Google's library has loaded. See the
+    // overview comment above interactiveTokenClient/silentTokenClient for
+    // why there are two of them.
+    function gisLoaded() {
+        interactiveTokenClient = google.accounts.oauth2.initTokenClient({
+            client_id: CLIENT_ID, scope: SCOPES, callback: handleTokenResponse,
+        });
+        silentTokenClient = google.accounts.oauth2.initTokenClient({
+            client_id: CLIENT_ID, scope: SCOPES,
+            callback: (resp) => {
+                const resolve = pendingSilentRefreshResolve;
+                pendingSilentRefreshResolve = null;
+                if (resp.error) { resolve && resolve(false); return; }
+                accessToken = resp.access_token;
+                if (currentUser) {
+                    saveSession(currentUser.email, currentUser.company, accessToken, currentUser.name, currentUser.label);
+                }
+                resolve && resolve(true);
+            },
+        });
+
+        // These listeners need to be live whether or not a cached session
+        // exists — if a stale session gets bounced back to the gate (see
+        // verifySessionOnLoad below), the sign-in button has to work then too.
+        document.getElementById('gateSignInBtn').addEventListener('click', () => {
+            if (!interactiveTokenClient) { showGateError('Google API not loaded yet — please wait and try again.'); return; }
+            interactiveTokenClient.requestAccessToken({ prompt: 'select_account' });
+        });
+        document.getElementById('signInBtn').addEventListener('click', () => {
+            if (!interactiveTokenClient) return;
+            interactiveTokenClient.requestAccessToken({ prompt: 'select_account' });
+        });
+
+        const session = loadSession();
+        if (session) {
+            applySession(session.email, session.company, session.token, session.name, session.label);
+            // Check the token is actually still good right now, before the
+            // person starts filling anything in — not later at upload time.
+            verifySessionOnLoad();
+        }
+    }
+
+    // Runs right after an app open with a cached session. Tries a silent
+    // refresh immediately; if that fails, the cached token is dead and we
+    // drop back to the sign-in gate straight away — before any delivery
+    // has been started, so there's nothing to lose.
+    async function verifySessionOnLoad() {
+        const ok = await ensureFreshToken();
+        if (ok) return;
+        signOutLocally();
+        showSignInGate('Your session expired — please sign in again to continue.');
+    }
+
+    // Attempts to silently refresh accessToken (no popup/prompt shown to the
+    // user when possible — relies on the existing Google session in the
+    // browser). Resolves true if a fresh token was obtained, false otherwise.
+    // Falls back after 6s in case the silent-refresh callback never fires
+    // (happens in some mobile browsers when third-party cookies are
+    // blocked) — in that case we just proceed with whatever token we have
+    // rather than hang the upload forever.
+    // Makes one attempt at a quiet background token refresh, waiting up to
+    // timeoutMs for Google to respond. Resolves true/false — never throws.
+    function attemptSilentRefresh(timeoutMs) {
+        return new Promise((resolve) => {
+            if (!silentTokenClient) { resolve(false); return; }
+            let settled = false;
+            const finish = (val) => {
+                if (settled) return;
+                settled = true;
+                pendingSilentRefreshResolve = null;
+                resolve(val);
+            };
+            const timeoutId = setTimeout(() => finish(false), timeoutMs);
+            const wrappedFinish = (val) => { clearTimeout(timeoutId); finish(val); };
+            pendingSilentRefreshResolve = wrappedFinish;
+            try {
+                silentTokenClient.requestAccessToken({ prompt: '' });
+            } catch (e) {
+                wrappedFinish(false);
+            }
+        });
+    }
+
+    // Tries to quietly refresh the Google token in the background — no
+    // popup, nothing shown to the person. A slow moment on site can make
+    // the first attempt time out even though it would have worked given
+    // another second or two, so this gives it a second try before finally
+    // falling back to whatever token we already have (which may then force
+    // a full sign-in if there isn't a usable one).
+    async function ensureFreshToken() {
+        if (await attemptSilentRefresh(10000)) return true;
+        if (await attemptSilentRefresh(10000)) return true;
+        return !!accessToken;
+    }
+
+    // Fetches via the proxy and, if the Worker reports an invalid/expired
+    // token, tries one silent refresh + retry before giving up.
+    async function proxyFetchJson(body) {
+        let res  = await proxyFetch(body);
+        let json = await res.json();
+        if (json && json.error && /invalid|expired/i.test(json.error)) {
+            const refreshed = await ensureFreshToken();
+            if (refreshed) {
+                res  = await proxyFetch(body);
+                json = await res.json();
+            }
+        }
+        return json;
+    }
+
+    function saveSession(email, company, token, name, label) {
+        localStorage.setItem('deliveryTrackerSession', JSON.stringify(
+            { email, company, token, name, label, expiry: Date.now() + 7 * 24 * 60 * 60 * 1000 }
+        ));
+    }
+    function loadSession() {
+        try {
+            const raw = localStorage.getItem('deliveryTrackerSession');
+            if (!raw) return null;
+            const s = JSON.parse(raw);
+            if (Date.now() > s.expiry) { localStorage.removeItem('deliveryTrackerSession'); return null; }
+            return s;
+        } catch(e) { return null; }
+    }
+    function clearSession() { localStorage.removeItem('deliveryTrackerSession'); }
+
+    // The one place that defines "what does signing out mean" — clears the
+    // saved session plus the in-memory user/token. Used both by the manual
+    // Sign Out button and by an expired session on startup, so both cases
+    // stay in sync if this ever needs to change.
+    function signOutLocally() {
+        clearSession();
+        accessToken = null;
+        currentUser = null;
+    }
+
+    // Shows the full-screen sign-in gate with an explanatory message,
+    // without reloading the page — used when a session goes bad mid-use
+    // rather than at a fresh app open.
+    function showSignInGate(message) {
+        updateGoogleStatus(false);
+        document.getElementById('companyLabel').textContent = 'Not signed in';
+        document.getElementById('accessGate').style.display = 'flex';
+        if (message) showGateError(message);
+    }
+
+    async function applySession(email, company, token, name, label) {
+        accessToken = token;
+        currentUser = { email, company, name };
+        document.getElementById('accessGate').style.display = 'none';
+        document.getElementById('companyLabel').textContent = label + ' — logged in as ' + email;
+        updateGoogleStatus(true);
+        await migrateUnknownDeliveries(company);
+        updateDeliveryCount();
+        const draft = loadDraft();
+        if (draft && (draft.orderNumber || draft.photo || draft.signature)) {
+            restoreDraft(draft);
+        }
+    }
+
+    async function handleTokenResponse(tokenResponse) {
+        if (tokenResponse.error) { showGateError('Sign-in failed: ' + tokenResponse.error); return; }
+        accessToken = tokenResponse.access_token;
+        try {
+            const resp  = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', { headers: { Authorization: 'Bearer ' + accessToken } });
+            const info  = await resp.json();
+            const email = (info.email || '').toLowerCase().trim();
+            showGateError('Verifying access...');
+            // No secret in the body — the Worker authenticates via the Bearer token
+            const verifyResp = await proxyFetch({ action: 'verifyUser', email });
+            const user = await verifyResp.json();
+            if (!user.approved) { accessToken = null; showGateError('Access denied. ' + (user.reason || 'Contact your administrator.')); return; }
+            saveSession(email, user.company, accessToken, user.name, user.label);
+            applySession(email, user.company, accessToken, user.name, user.label);
+        } catch(err) { showGateError('Could not verify your account. Please try again.'); console.error(err); }
+    }
+
+    function showGateError(msg) {
+        const el = document.getElementById('gateError');
+        el.textContent = msg;
+        el.style.display = 'block';
+    }
+
+    function updateGoogleStatus(connected) {
+        const statusEl  = document.getElementById('googleStatus');
+        const uploadBtn = document.getElementById('uploadDriveBtn');
+        const signInBtn = document.getElementById('signInBtn');
+        const banner    = document.getElementById('offlineBanner');
+        if (connected) {
+            statusEl.innerHTML = '<span class="google-connected">✅ Connected to Google Drive</span>';
+            uploadBtn.classList.remove('hidden');
+            signInBtn.classList.add('hidden');
+            banner.style.display = 'none';
+        } else {
+            statusEl.innerHTML = '<span class="google-disconnected">📴 Not connected to Google Drive</span>';
+            uploadBtn.classList.add('hidden');
+            signInBtn.classList.remove('hidden');
+            banner.style.display = 'block';
+        }
+    }
+
+    const optionsOverlay = document.getElementById('optionsOverlay');
+    document.getElementById('optionsBtn').addEventListener('click', () => { optionsOverlay.style.display = 'flex'; });
+    document.getElementById('optionsCloseBtn').addEventListener('click', () => { optionsOverlay.style.display = 'none'; });
+    optionsOverlay.addEventListener('click', e => { if (e.target === optionsOverlay) optionsOverlay.style.display = 'none'; });
+    document.getElementById('signOutBtn').addEventListener('click', () => {
+        if (confirm('Are you sure you want to sign out?')) { signOutLocally(); location.reload(); }
+    });
+
+    // ── IndexedDB ──────────────────────────────────────────────────────
+    const DB_NAME = 'DeliveryTrackerDB', DB_VERSION = 1, STORE_NAME = 'deliveries';
+    let db = null;
+
+    function openDB() {
+        return new Promise((resolve, reject) => {
+            if (db) { resolve(db); return; }
+            const req = indexedDB.open(DB_NAME, DB_VERSION);
+            req.onupgradeneeded = e => { e.target.result.createObjectStore(STORE_NAME, { keyPath: 'id', autoIncrement: true }); };
+            req.onsuccess = e => { db = e.target.result; resolve(db); };
+            req.onerror   = e => reject(e.target.error);
+        });
+    }
+
+    async function getDeliveries() {
+        const database = await openDB();
+        return new Promise((resolve, reject) => {
+            const tx  = database.transaction(STORE_NAME, 'readonly');
+            const req = tx.objectStore(STORE_NAME).getAll();
+            req.onsuccess = e => {
+                const company = currentUser ? currentUser.company : null;
+                const all = e.target.result;
+                resolve(company ? all.filter(d => d.company === company) : all);
+            };
+            req.onerror = e => reject(e.target.error);
+        });
+    }
+
+    async function addDelivery(delivery) {
+        delivery.company = currentUser ? currentUser.company : 'unknown';
+        const database = await openDB();
+        return new Promise((resolve, reject) => {
+            const tx  = database.transaction(STORE_NAME, 'readwrite');
+            const req = tx.objectStore(STORE_NAME).add(delivery);
+            req.onsuccess = () => resolve();
+            req.onerror   = e => reject(e.target.error);
+        });
+    }
+
+    async function deleteDelivery(id) {
+        const database = await openDB();
+        return new Promise((resolve, reject) => {
+            const tx = database.transaction(STORE_NAME, 'readwrite');
+            tx.objectStore(STORE_NAME).delete(id).onsuccess = () => resolve();
+            tx.onerror = e => reject(e.target.error);
+        });
+    }
+
+    // Deliveries saved while nobody was signed in get tagged 'unknown'.
+    // As soon as someone signs in, claim those under their company so
+    // they show up in the pending count and get uploaded — nothing is
+    // silently orphaned just because the driver hadn't logged in yet.
+    async function migrateUnknownDeliveries(company) {
+        const database = await openDB();
+        return new Promise((resolve, reject) => {
+            const tx    = database.transaction(STORE_NAME, 'readwrite');
+            const store = tx.objectStore(STORE_NAME);
+            const req   = store.getAll();
+            req.onsuccess = () => {
+                const toFix = req.result.filter(d => d.company === 'unknown');
+                toFix.forEach(d => { d.company = company; store.put(d); });
+                resolve(toFix.length);
+            };
+            req.onerror = e => reject(e.target.error);
+        });
+    }
+
+    async function purgeOldDeliveries() {
+        const database = await openDB();
+        const all = await new Promise((resolve, reject) => {
+            const tx  = database.transaction(STORE_NAME, 'readonly');
+            const req = tx.objectStore(STORE_NAME).getAll();
+            req.onsuccess = e => resolve(e.target.result);
+            req.onerror   = e => reject(e.target.error);
+        });
+        const cutoff = Date.now() - 30 * 24 * 60 * 60 * 1000;
+        for (const d of all) {
+            if (new Date(d.dateTime).getTime() < cutoff) await deleteDelivery(d.id);
+        }
+    }
+
+    async function updateDeliveryCount() {
+        const deliveries = await getDeliveries();
+        const count = deliveries.filter(d => !d.uploaded).length;
+        document.getElementById('deliveryCount').textContent = count;
+    }
+
+    // ── GPS ────────────────────────────────────────────────────────────
+    function getCurrentPosition() {
+        return new Promise((resolve, reject) => {
+            if (!navigator.geolocation) { reject(new Error('Geolocation not supported')); return; }
+            navigator.geolocation.getCurrentPosition(resolve, reject, { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 });
+        });
+    }
+
+    function formatDate(date) {
+        const y  = String(date.getFullYear()).slice(-2);
+        const mo = String(date.getMonth() + 1).padStart(2, '0');
+        const d  = String(date.getDate()).padStart(2, '0');
+        const h  = String(date.getHours()).padStart(2, '0');
+        const mi = String(date.getMinutes()).padStart(2, '0');
+        const s  = String(date.getSeconds()).padStart(2, '0');
+        return `${d}-${mo}-${y}_${h}-${mi}-${s}`;
+    }
+
+    function showMessage(type, text) {
+        const successMsg = document.getElementById('successMsg');
+        const errorMsg   = document.getElementById('errorMsg');
+        if (type === 'success') {
+            successMsg.textContent = text; successMsg.style.display = 'block'; errorMsg.style.display = 'none';
+            setTimeout(() => successMsg.style.display = 'none', 3000);
+        } else {
+            errorMsg.textContent = text; errorMsg.style.display = 'block'; successMsg.style.display = 'none';
+            setTimeout(() => errorMsg.style.display = 'none', 3000);
+        }
+    }
+
+    async function handlePhotoCapture(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const compressImage = f => new Promise(resolve => {
+            const reader = new FileReader();
+            reader.onload = ev => {
+                const img = new Image();
+                img.onload = () => {
+                    const MAX = 800;
+                    let { width: w, height: h } = img;
+                    if (w > MAX || h > MAX) {
+                        if (w > h) { h = Math.round(h * MAX / w); w = MAX; }
+                        else       { w = Math.round(w * MAX / h); h = MAX; }
+                    }
+                    const c = document.createElement('canvas');
+                    c.width = w; c.height = h;
+                    c.getContext('2d').drawImage(img, 0, 0, w, h);
+                    resolve(c.toDataURL('image/jpeg', 0.60));
+                };
+                img.src = ev.target.result;
+            };
+            reader.readAsDataURL(f);
+        });
+        const compressed = await compressImage(file);
+        document.getElementById('preview-img').src = compressed;
+        document.getElementById('previewSection').classList.remove('hidden');
+        currentDelivery.photo = compressed;
+        document.getElementById('sigTriggerBtn').disabled = false;
+        checkFormComplete();
+        try {
+            document.getElementById('gpsInfo').classList.remove('hidden');
+            document.getElementById('gpsCoords').textContent = 'Getting location...';
+            const pos = await getCurrentPosition();
+            currentDelivery.latitude  = pos.coords.latitude;
+            currentDelivery.longitude = pos.coords.longitude;
+            document.getElementById('gpsCoords').textContent =
+                `${currentDelivery.latitude.toFixed(6)}, ${currentDelivery.longitude.toFixed(6)}`;
+            checkFormComplete();
+        } catch(err) {
+            document.getElementById('gpsCoords').textContent = 'GPS unavailable';
+            showMessage('error', 'Could not get GPS location. Photo saved without GPS.');
+        }
+    }
+
+    document.getElementById('camera-input').addEventListener('change', handlePhotoCapture);
+
+    // ── Signature Modal ────────────────────────────────────────────────
+    (function initSigModal() {
+        const modal       = document.getElementById('sigModal');
+        const canvas      = document.getElementById('sigCanvas');
+        const ctx         = canvas.getContext('2d');
+        const hintOverlay = document.getElementById('sigHintOverlay');
+        const confirmBtn  = document.getElementById('sigConfirmBtn');
+        const sigNameInp  = document.getElementById('sigName');
+        let drawing = false, hasSig = false, canvasReady = false;
+
+        function setupCanvas(preserve) {
+            const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
+            const rect  = canvas.getBoundingClientRect();
+            if (rect.width === 0 || rect.height === 0) return;
+            let snapshot = null;
+            if (preserve && canvasReady && hasSig) {
+                snapshot = canvas.toDataURL('image/png');
+            }
+            canvas.width  = rect.width  * ratio;
+            canvas.height = rect.height * ratio;
+            ctx.setTransform(1,0,0,1,0,0);
+            ctx.scale(ratio, ratio);
+            ctx.strokeStyle = '#111827'; ctx.lineWidth = 2.5;
+            ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+            canvasReady = true;
+            if (snapshot) {
+                const img = new Image();
+                img.onload = () => { ctx.drawImage(img, 0, 0, rect.width, rect.height); };
+                img.src = snapshot;
+            }
+        }
+
+        // If the screen rotates or resizes while the signature popup is
+        // open, redraw the box at the new size instead of leaving it
+        // stretched or clipped — and keep whatever was already signed.
+        let sigResizeTimer = null;
+        function handleSigResize() {
+            if (!modal.classList.contains('open')) return;
+            clearTimeout(sigResizeTimer);
+            sigResizeTimer = setTimeout(() => setupCanvas(true), 150);
+        }
+        window.addEventListener('resize', handleSigResize);
+        window.addEventListener('orientationchange', handleSigResize);
+
+        function openModal() {
+            hasSig = false; drawing = false; currentDelivery.signature = null;
+            if (ctx && canvasReady) ctx.clearRect(0, 0, canvas.width / (window.devicePixelRatio||1), canvas.height / (window.devicePixelRatio||1));
+            sigNameInp.value = ''; currentDelivery.signeeName = '';
+            hintOverlay.style.opacity = '1'; confirmBtn.disabled = true;
+            document.getElementById('sigModalOrderRef').textContent = document.getElementById('orderNumber').value.trim() || '—';
+            modal.classList.add('open');
+            requestAnimationFrame(setupCanvas);
+        }
+
+        function closeModal() { modal.classList.remove('open'); }
+
+        document.getElementById('sigTriggerBtn').addEventListener('click', openModal);
+        document.getElementById('sigModalClose').addEventListener('click', closeModal);
+        document.getElementById('sigCancelBtn').addEventListener('click',  closeModal);
+        modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+
+        document.getElementById('sigModalClear').addEventListener('click', () => {
+            if (!canvasReady) return;
+            ctx.clearRect(0, 0, canvas.width / (window.devicePixelRatio||1), canvas.height / (window.devicePixelRatio||1));
+            hasSig = false; currentDelivery.signature = null;
+            hintOverlay.style.opacity = '1'; updateConfirmBtn();
+        });
+
+        confirmBtn.addEventListener('click', () => {
+            const name = sigNameInp.value.trim();
+            if (!hasSig || !name) return;
+            currentDelivery.signature  = canvas.toDataURL('image/png');
+            currentDelivery.signeeName = name;
+            closeModal();
+            const btn = document.getElementById('sigTriggerBtn');
+            btn.classList.add('sig-done');
+            document.getElementById('sigTriggerLabel').textContent = `✓ Signed — ${name}`;
+            checkFormComplete();
+        });
+
+        sigNameInp.addEventListener('input', updateConfirmBtn);
+        function updateConfirmBtn() { confirmBtn.disabled = !(hasSig && sigNameInp.value.trim()); }
+
+        function getXY(e) {
+            const rect = canvas.getBoundingClientRect();
+            if (e.touches) return { x: e.touches[0].clientX - rect.left, y: e.touches[0].clientY - rect.top };
+            return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+        }
+        function startDraw(e) {
+            e.preventDefault(); if (!canvasReady) return;
+            drawing = true; const {x,y} = getXY(e); ctx.beginPath(); ctx.moveTo(x,y);
+        }
+        function draw(e) {
+            if (!drawing) return; e.preventDefault();
+            const {x,y} = getXY(e); ctx.lineTo(x,y); ctx.stroke(); ctx.beginPath(); ctx.moveTo(x,y);
+            if (!hasSig) { hasSig = true; hintOverlay.style.opacity = '0'; updateConfirmBtn(); }
+        }
+        function endDraw() { if (!drawing) return; drawing = false; ctx.beginPath(); }
+
+        canvas.addEventListener('mousedown',  startDraw);
+        canvas.addEventListener('mousemove',  draw);
+        canvas.addEventListener('mouseup',    endDraw);
+        canvas.addEventListener('mouseleave', endDraw);
+        canvas.addEventListener('touchstart', startDraw, { passive: false });
+        canvas.addEventListener('touchmove',  draw,      { passive: false });
+        canvas.addEventListener('touchend',   endDraw);
+
+        window.resetSigModal = function() {
+            hasSig = false; drawing = false; canvasReady = false;
+            currentDelivery.signature = null; currentDelivery.signeeName = '';
+            const btn = document.getElementById('sigTriggerBtn');
+            btn.classList.remove('sig-done');
+            document.getElementById('sigTriggerLabel').textContent = 'Get Signature';
+        };
+    })();
+
+    document.getElementById('cameraBtn').addEventListener('click', () => document.getElementById('camera-input').click());
+
+    function checkFormComplete() {
+        const orderNumber = document.getElementById('orderNumber').value.trim();
+        const hasPhoto = currentDelivery.photo !== null;
+        const hasSig   = currentDelivery.signature !== null;
+        const hasName  = (currentDelivery.signeeName || '').trim() !== '';
+        const saveBtn  = document.getElementById('saveBtn');
+        document.getElementById('check-order').classList.toggle('done', !!orderNumber);
+        document.getElementById('check-photo').classList.toggle('done', hasPhoto);
+        document.getElementById('check-sig').classList.toggle('done', hasSig && hasName);
+        if (orderNumber && hasPhoto && hasSig && hasName) {
+            saveBtn.disabled = false; saveBtn.style.opacity = '1'; saveBtn.style.cursor = 'pointer';
+        } else {
+            saveBtn.disabled = true; saveBtn.style.opacity = '0.5'; saveBtn.style.cursor = 'not-allowed';
+        }
+        saveDraft();
+    }
+
+    document.getElementById('orderNumber').addEventListener('input', checkFormComplete);
+
+    // Converts a captured photo/signature (currently a base64 "data:" string)
+    // into a compact binary Blob for storage — cuts the on-device footprint
+    // by roughly a third with no change to the actual image quality.
+    async function dataUrlToBlob(dataUrl) {
+        const res = await fetch(dataUrl);
+        return await res.blob();
+    }
+
+    async function saveDelivery() {
+        const orderNumber = document.getElementById('orderNumber').value.trim();
+        const signeeName  = currentDelivery.signeeName || '';
+        if (!orderNumber || !currentDelivery.photo) { showMessage('error', 'Please fill in all fields and take a photo'); return; }
+        if (!currentDelivery.signature || !signeeName) { showMessage('error', 'Please capture a signature — tap Get Signature'); return; }
+        const now = new Date();
+        const photoBlob = await dataUrlToBlob(currentDelivery.photo);
+        const sigBlob   = await dataUrlToBlob(currentDelivery.signature);
+        const delivery = {
+            orderNumber,
+            photo:      photoBlob,
+            photoName:  `${orderNumber}_${formatDate(now)}.jpg`,
+            latitude:   currentDelivery.latitude,
+            longitude:  currentDelivery.longitude,
+            timestamp:  now.toISOString(),
+            dateTime:   now.toLocaleString(),
+            signature:  sigBlob,
+            signeeName,
+            driver:     currentUser ? currentUser.name : 'Unknown',
+            uploaded:   false
+        };
+        await addDelivery(delivery);
+        showMessage('success', `Delivery #${orderNumber} saved! ✓`);
+        setTimeout(() => { resetForm(); updateDeliveryCount(); }, 1200);
+    }
+
+    document.getElementById('saveBtn').onclick = function(e) { e.preventDefault(); e.stopPropagation(); saveDelivery(); };
+
+    // ── Upload to Drive ────────────────────────────────────────────────
+    // True if the stored photo/signature is a usable file — either the
+    // newer compact binary format, or (for deliveries saved before this
+    // update) the older base64 "data:" string. Guards against legacy/
+    // partial IndexedDB records whose photo/signature ended up null or
+    // malformed.
+    function isValidDataUrl(val) {
+        if (val instanceof Blob) return val.size > 0;
+        if (typeof val !== 'string') return false;
+        const parts = val.split(',');
+        return parts.length === 2 && parts[1].length > 0;
+    }
+
+    // Converts a stored photo/signature back to a base64 "data:" string,
+    // whichever format it was saved in — needed whenever we hand the file
+    // off somewhere that expects that format (Drive upload, export report).
+    async function toBase64(val) {
+        if (typeof val === 'string') return val;
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload  = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(val);
+        });
+    }
+
+    document.getElementById('uploadDriveBtn').addEventListener('click', async () => {
+        document.getElementById('optionsOverlay').style.display = 'none';
+        await new Promise(r => setTimeout(r, 50));
+        const allDeliveries = await getDeliveries();
+        const pending       = allDeliveries.filter(d => !d.uploaded);
+        if (pending.length === 0) { showMessage('error', 'No new deliveries to upload'); return; }
+
+        const deliveries        = pending.filter(d => isValidDataUrl(d.photo));
+        const corruptDeliveries = pending.filter(d => !isValidDataUrl(d.photo));
+        if (corruptDeliveries.length > 0) {
+            console.error('Skipping deliveries with corrupt/missing photo data:', corruptDeliveries.map(d => d.orderNumber));
+        }
+        if (deliveries.length === 0) {
+            showMessage('error', `${corruptDeliveries.length} delivery(ies) have corrupt photo data and can't be uploaded. Check Options → View All.`);
+            return;
+        }
+
+        const progressEl   = document.getElementById('uploadProgress');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        progressEl.style.display = 'block';
+
+        try {
+            // Refresh the token up front (silent if possible) so a stale
+            // hour-old token doesn't fail mid-batch.
+            progressText.textContent = 'Connecting to Drive...';
+            await ensureFreshToken();
+            const folderId = await getCompanyFolderId();
+            const photoLinks = {}, sigLinks = [], uploadedIds = [];
+            let count = 0;
+            const CONCURRENCY = 3; // how many deliveries to upload at once
+            let nextIndex = 0;
+
+            async function uploadOne(delivery) {
+                // Photo and signature go up in parallel instead of one after
+                // the other — each is an independent file.
+                const photoPromise = uploadPhotoToDrive(delivery, folderId);
+                const sigPromise   = isValidDataUrl(delivery.signature)
+                    ? uploadSignatureToDrive(delivery, folderId)
+                    : Promise.resolve(null);
+                const [photoResult, sigResult] = await Promise.all([photoPromise, sigPromise]);
+
+                if (photoResult.id) photoLinks[delivery.orderNumber] = `https://drive.google.com/file/d/${photoResult.id}/view`;
+                else throw new Error('Photo upload returned no ID for ' + delivery.photoName);
+
+                if (sigResult && sigResult.id) sigLinks[delivery.orderNumber] = `https://drive.google.com/file/d/${sigResult.id}/view`;
+
+                uploadedIds.push(delivery.id);
+                count++;
+                progressText.textContent = `Uploading files ${count} of ${deliveries.length}...`;
+                progressFill.style.width = `${(count / deliveries.length) * 75}%`;
+            }
+
+            // A small pool of workers pulls the next delivery off the list
+            // as soon as it finishes its own — so several uploads are always
+            // in flight together instead of waiting on each other.
+            async function worker() {
+                while (nextIndex < deliveries.length) {
+                    const delivery = deliveries[nextIndex++];
+                    await uploadOne(delivery);
+                }
+            }
+            progressText.textContent = `Uploading files 0 of ${deliveries.length}...`;
+            await Promise.all(Array.from({ length: Math.min(CONCURRENCY, deliveries.length) }, worker));
+
+            progressText.textContent = 'Saving delivery log...';
+            progressFill.style.width = '90%';
+            await uploadExcelToDrive(deliveries, folderId, photoLinks, sigLinks);
+
+            for (const id of uploadedIds) await deleteDelivery(id);
+
+            progressFill.style.width = '100%';
+            progressEl.style.display = 'none';
+            updateDeliveryCount();
+            const skippedNote = corruptDeliveries.length > 0 ? ` (${corruptDeliveries.length} skipped due to corrupt data)` : '';
+            showMessage('success', `Successfully uploaded ${deliveries.length} deliveries to Google Drive! ✓${skippedNote}`);
+        } catch(error) {
+            console.error('Upload error:', error);
+            progressEl.style.display = 'none';
+            const msg = error?.message || JSON.stringify(error) || 'Unknown error';
+            if (/invalid|expired/i.test(msg)) {
+                showMessage('error', 'Your Google session expired. Please sign in again from Options.');
+            } else if (/uploading right now/i.test(msg)) {
+                showMessage('error', msg);
+            } else {
+                showMessage('error', 'Upload failed: ' + msg);
+            }
+        }
+    });
+
+    async function getCompanyFolderId() {
+        // We no longer send a company name — the backend looks up the
+        // signed-in driver's own company from their verified email and
+        // only ever returns that company's folder.
+        const json = await proxyFetchJson({ action: 'getFolder', email: currentUser.email });
+        if (!json.id) throw new Error('Could not get folder: ' + JSON.stringify(json));
+        return json.id;
+    }
+
+    async function uploadPhotoToDrive(delivery, folderId) {
+        const base64Full = await toBase64(delivery.photo);
+        const json = await proxyFetchJson({ action: 'uploadPhoto', email: currentUser.email, base64Data: base64Full.split(',')[1], filename: delivery.photoName });
+        if (!json.id) throw new Error('Photo upload failed: ' + JSON.stringify(json));
+        return json;
+    }
+
+    async function uploadSignatureToDrive(delivery, folderId) {
+        const base64Full = await toBase64(delivery.signature);
+        return await proxyFetchJson({ action: 'uploadPhoto', email: currentUser.email, base64Data: base64Full.split(',')[1], filename: delivery.photoName.replace('.jpg', '_sig.png') });
+    }
+
+    async function uploadExcelToDrive(deliveries, folderId, photoLinks = {}, sigLinks = {}) {
+        const header = ['Order Number', 'Date/Time', 'Driver', 'GPS Link', 'Photo Link', 'Signee Name', 'Signature Link'];
+        const dataRows = deliveries.map(d => [
+            d.orderNumber,
+            d.dateTime,
+            d.driver || 'Unknown',
+            d.latitude && d.longitude ? `=HYPERLINK("https://www.google.com/maps?q=${d.latitude},${d.longitude}","📍 View on Maps")` : 'N/A',
+            photoLinks[d.orderNumber] ? `=HYPERLINK("${photoLinks[d.orderNumber]}","📸 View Photo")` : 'N/A',
+            d.signeeName || 'N/A',
+            sigLinks[d.orderNumber]  ? `=HYPERLINK("${sigLinks[d.orderNumber]}","✍️ View Signature")` : 'N/A'
+        ]);
+
+        const today   = new Date();
+        const weekNum = (() => {
+            const d = new Date(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()));
+            d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+            const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+            return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+        })();
+
+        const companySlug = (currentUser?.company || 'unknown').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+        const filename    = `${companySlug}_week-${weekNum}-${today.getFullYear()}.xlsx`;
+
+        const json = await proxyFetchJson({ action: 'uploadExcel', email: currentUser.email, rows: JSON.stringify([header, ...dataRows]), filename });
+        if (json.error === 'BUSY') throw new Error(json.message || 'Another delivery is uploading right now — please wait a moment and try again.');
+        if (json.error) throw new Error('Excel upload failed: ' + json.error);
+        if (!json.id)   throw new Error('Excel upload failed: no ID returned');
+        return json;
+    }
+
+    // ── Export local backup ────────────────────────────────────────────
+    document.getElementById('exportBtn').addEventListener('click', async () => {
+        const deliveries = await getDeliveries();
+        if (deliveries.length === 0) { showMessage('error', 'No deliveries to export'); return; }
+        showMessage('success', 'Building export, please wait...');
+
+        const excelData = deliveries.map(d => ({
+            'Order Number': d.orderNumber,
+            'Date':         d.dateTime ? d.dateTime.split(',')[0].trim() : 'N/A',
+            'Time':         d.dateTime ? (d.dateTime.split(',')[1]?.trim() ?? 'N/A') : 'N/A',
+            'Driver':       d.driver   || 'N/A',
+            'Latitude':     d.latitude  ?? 'N/A',
+            'Longitude':    d.longitude ?? 'N/A',
+            'GPS Link':     d.latitude && d.longitude ? `https://www.google.com/maps?q=${d.latitude},${d.longitude}` : 'N/A',
+            'Signee Name':  d.signeeName || 'N/A',
+            'Photo':        '',
+            'Signature':    ''
+        }));
+        const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.json_to_sheet(excelData);
+        ws['!cols'] = [{wch:15},{wch:14},{wch:10},{wch:20},{wch:12},{wch:12},{wch:50},{wch:20},{wch:18},{wch:18}];
+        XLSX.utils.book_append_sheet(wb, ws, 'Deliveries');
+
+        const tableRows = (await Promise.all(deliveries.map(async (d, i) => {
+            const gps      = d.latitude && d.longitude ? `<a href="https://www.google.com/maps?q=${d.latitude},${d.longitude}" target="_blank">📍 ${Number(d.latitude).toFixed(6)}, ${Number(d.longitude).toFixed(6)}</a>` : 'N/A';
+            const datePart = d.dateTime ? d.dateTime.split(',')[0].trim() : 'N/A';
+            const timePart = d.dateTime ? (d.dateTime.split(',')[1]?.trim() ?? 'N/A') : 'N/A';
+            const photoSrc = d.photo     ? await toBase64(d.photo)     : null;
+            const sigSrc   = d.signature ? await toBase64(d.signature) : null;
+            const photo    = photoSrc ? `<img src="${photoSrc}" style="height:90px;width:auto;border-radius:4px;">` : 'No photo';
+            const sig      = sigSrc   ? `<img src="${sigSrc}"   style="height:60px;width:auto;border-radius:4px;background:#fff;padding:4px;">` : 'No signature';
+            const rowBg    = i % 2 === 0 ? '#ffffff' : '#f3f4f6';
+            return `<tr style="background:${rowBg}"><td>${d.orderNumber}</td><td>${datePart}</td><td>${timePart}</td><td>${d.driver||'N/A'}</td><td>${gps}</td><td>${d.signeeName||'N/A'}</td><td style="padding:4px;">${sig}</td><td style="padding:4px;">${photo}</td></tr>`;
+        }))).join('');
+
+        const htmlReport = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Delivery Report</title><style>body{font-family:Arial,sans-serif;padding:20px;background:#f9fafb;}h1{color:#374151;margin-bottom:16px;}p{color:#6b7280;margin-bottom:20px;font-size:13px;}table{border-collapse:collapse;width:100%;background:white;box-shadow:0 1px 4px rgba(0,0,0,.1);border-radius:8px;overflow:hidden;}th{background:#1a56db;color:white;padding:10px 12px;text-align:left;font-size:13px;}td{padding:8px 12px;border-bottom:1px solid #e5e7eb;font-size:13px;vertical-align:middle;}tr:last-child td{border-bottom:none;}a{color:#1a56db;}</style></head><body><h1>📦 Delivery Report</h1><p>Generated: ${new Date().toLocaleString()} | Total: ${deliveries.length}</p><table><thead><tr><th>Order #</th><th>Date</th><th>Time</th><th>Driver</th><th>GPS</th><th>Signee</th><th>Signature</th><th>Photo</th></tr></thead><tbody>${tableRows}</tbody></table></body></html>`;
+
+        const htmlBlob = new Blob([htmlReport], { type: 'text/html' });
+        const htmlUrl  = URL.createObjectURL(htmlBlob);
+        const htmlLink = document.createElement('a');
+        htmlLink.href = htmlUrl; htmlLink.download = `delivery_report_${formatDate(new Date()).split('_')[0]}.html`;
+        document.body.appendChild(htmlLink); htmlLink.click(); document.body.removeChild(htmlLink);
+        setTimeout(() => URL.revokeObjectURL(htmlUrl), 5000);
+        setTimeout(() => XLSX.writeFile(wb, `deliveries_${formatDate(new Date()).split('_')[0]}.xlsx`), 800);
+        deliveries.forEach((d, i) => {
+            if (!d.photo) return;
+            setTimeout(() => {
+                const isBlob = d.photo instanceof Blob;
+                const url = isBlob ? URL.createObjectURL(d.photo) : d.photo;
+                const link = document.createElement('a');
+                link.href = url; link.download = d.photoName;
+                document.body.appendChild(link); link.click(); document.body.removeChild(link);
+                if (isBlob) setTimeout(() => URL.revokeObjectURL(url), 3000);
+            }, 1500 + i * 600);
+        });
+        showMessage('success', `Exporting ${deliveries.length} deliveries — check your downloads! ✓`);
+    });
+
+    // ── View all ───────────────────────────────────────────────────────
+    document.getElementById('viewBtn').addEventListener('click', async () => {
+        const deliveries    = await getDeliveries();
+        const listContainer = document.getElementById('deliveriesList');
+        if (deliveries.length === 0) { showMessage('error', 'No deliveries yet'); return; }
+        listContainer.innerHTML = '<h3 style="padding:14px 16px;font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border-bottom:1px solid var(--steel);color:var(--mist);">Recent Deliveries</h3>';
+        deliveries.slice().reverse().forEach(d => {
+            const item = document.createElement('div');
+            item.className = 'delivery-item';
+            item.innerHTML = `<div>
+                <div class="delivery-order">Order #${d.orderNumber} ${d.uploaded ? '☁️' : '📱'}</div>
+                <div class="delivery-time">${d.dateTime}</div>
+                ${d.driver    ? `<div style="font-size:11px;color:#93c5fd;margin-top:2px;">🚚 ${d.driver}</div>` : ''}
+                ${d.latitude  ? `<div style="font-size:11px;color:var(--steel-2);margin-top:2px;">📍 ${d.latitude.toFixed(4)}, ${d.longitude.toFixed(4)}</div>` : ''}
+                ${d.signeeName? `<div style="font-size:11px;color:#6ee7b7;margin-top:2px;">✍️ ${d.signeeName}</div>` : ''}
+            </div>`;
+            listContainer.appendChild(item);
+        });
+        listContainer.classList.toggle('hidden');
+    });
+
+    // ── Privacy Modal ──────────────────────────────────────────────────
+    const privacyModal = document.getElementById('privacyModal');
+    document.getElementById('privacyLink').addEventListener('click', () => privacyModal.classList.add('open'));
+    document.getElementById('privacyModalClose').addEventListener('click', () => privacyModal.classList.remove('open'));
+    privacyModal.addEventListener('click', e => { if (e.target === privacyModal) privacyModal.classList.remove('open'); });
+
+    // ── Init ───────────────────────────────────────────────────────────
+    function loadGapi() {
+        const script = document.createElement('script');
+        script.src = 'https://apis.google.com/js/api.js';
+        script.onload = gapiLoaded;
+        document.head.appendChild(script);
+    }
+    function waitForGIS(n) {
+        if (typeof google !== 'undefined' && google.accounts) { gisLoaded(); }
+        else if (n > 0) { setTimeout(() => waitForGIS(n - 1), 500); }
+        else {
+            const el = document.getElementById('gateError');
+            if (el) { el.textContent = 'Google sign-in could not load. Please check your connection and refresh.'; el.style.display = 'block'; }
+        }
+    }
+
+    updateDeliveryCount();
+    purgeOldDeliveries();
+    loadGapi();
+    document.getElementById('versionLabel').textContent = APP_VERSION;
+    window.addEventListener('load', () => waitForGIS(10));
+
+</script>
+</body>
+</html>
