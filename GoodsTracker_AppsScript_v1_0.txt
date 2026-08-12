@@ -1,0 +1,380 @@
+// ── Goods Tracker — Apps Script backend — v1.0 ──────────────────────────
+// This is a SEPARATE backend from the Ullr delivery system. It uses the
+// same pattern (Google sign-in, per-company Drive folder, an approved
+// users list) but tracks items going OUT of the business and being
+// booked back IN, instead of deliveries.
+
+// ── Config — fill these in before deploying ──────────────────────────
+// Create a brand new Google Drive folder for this app (don't reuse the
+// Ullr one) and paste its ID below.
+var CENTRAL_FOLDER_ID = '12Spa6jyc4Pdp-lOhm6oIfRX6FimawIv1';
+var USERS_SHEET_NAME  = 'goods_tracker_users';
+// Must match the APPS_SCRIPT_SECRET value set in your Cloudflare Worker's
+// environment variables — this is what stops anyone who finds this
+// script's raw web address from calling it directly, bypassing the
+// Worker's Google sign-in check entirely.
+var SECRET = 'd735860adfde2b05e0823cebbcd957fa37dc72c2360cee24';
+
+// ── User sheet helpers ──────────────────────────────────────────────────
+
+function getUsersSheet() {
+  var central  = DriveApp.getFolderById(CENTRAL_FOLDER_ID);
+  var existing = central.getFilesByName(USERS_SHEET_NAME);
+
+  if (existing.hasNext()) {
+    return SpreadsheetApp.openById(existing.next().getId()).getActiveSheet();
+  }
+
+  var ss    = SpreadsheetApp.create(USERS_SHEET_NAME);
+  var sheet = ss.getActiveSheet();
+  sheet.getRange(1, 1, 1, 4).setValues([['email', 'company', 'name', 'label']]);
+
+  // Add your first approved user(s) here so sign-in works straight away.
+  var seed = [
+    ['ullrsystem@gmail.com', 'testadmin', 'Test User', 'Test/Admin'],
+  ];
+  sheet.getRange(2, 1, seed.length, 4).setValues(seed);
+
+  var file = DriveApp.getFileById(ss.getId());
+  central.addFile(file);
+  DriveApp.getRootFolder().removeFile(file);
+
+  return sheet;
+}
+
+var _usersCache = null;
+function getApprovedUsers() {
+  if (_usersCache) return _usersCache;
+  var sheet = getUsersSheet();
+  var data  = sheet.getDataRange().getValues();
+  var users = [];
+  for (var i = 1; i < data.length; i++) {
+    var row = data[i];
+    var email = (row[0] || '').toString().toLowerCase().trim();
+    if (!email) continue;
+    users.push({
+      email:   email,
+      company: (row[1] || '').toString().trim(),
+      name:    (row[2] || '').toString().trim(),
+      label:   (row[3] || '').toString().trim(),
+    });
+  }
+  _usersCache = users;
+  return users;
+}
+
+function verifyUser(email) {
+  if (!email) return { approved: false, reason: 'No email provided' };
+  var normalised = email.toLowerCase().trim();
+  var users = getApprovedUsers();
+  for (var i = 0; i < users.length; i++) {
+    if (users[i].email === normalised) {
+      var match = users[i];
+      return {
+        approved: true,
+        email:    match.email,
+        company:  match.company,
+        name:     match.name,
+        label:    match.label || match.company,
+      };
+    }
+  }
+  return { approved: false, reason: 'Not authorised' };
+}
+
+function getOrCreateFolderForCompany(companyName) {
+  var central  = DriveApp.getFolderById(CENTRAL_FOLDER_ID);
+  var existing = central.getFoldersByName(companyName);
+  if (existing.hasNext()) return { id: existing.next().getId() };
+  return { id: central.createFolder(companyName).getId() };
+}
+
+function getOrCreateFolder(email) {
+  var verified = verifyUser(email);
+  if (!verified.approved) return { error: 'Unauthorised' };
+  return getOrCreateFolderForCompany(verified.company);
+}
+
+// ── The company's ongoing goods log — one spreadsheet FILE per company,
+// with a separate TAB inside it for each system (Galv, Painting, ...)
+// so everything for one company lives in one place. ──────────────────
+
+var LOG_HEADERS = ['ID', 'Job Number', 'Status', 'Date Out', 'Photo Out Link', 'GPS Out Link', 'Sent By', 'Quantity Out', 'Date In', 'Booked In By', 'Photo In Link', 'GPS In Link', 'Quantity In'];
+
+function getCompanyLogFile(companyName, folderId) {
+  var folder   = DriveApp.getFolderById(folderId);
+  var slug     = companyName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  var fileName = slug + '_goods_log';
+  var existing = folder.getFilesByName(fileName);
+
+  if (existing.hasNext()) {
+    return SpreadsheetApp.openById(existing.next().getId());
+  }
+  var ss = SpreadsheetApp.create(fileName);
+  var file = DriveApp.getFileById(ss.getId());
+  folder.addFile(file);
+  DriveApp.getRootFolder().removeFile(file);
+  return ss;
+}
+
+function getCompanyLogSheet(companyName, folderId, system) {
+  var ss      = getCompanyLogFile(companyName, folderId);
+  var tabName = (system === 'painting') ? 'Painting' : 'Galv';
+  var sheet   = ss.getSheetByName(tabName);
+
+  if (!sheet) {
+    var allSheets = ss.getSheets();
+    if (tabName === 'Galv' && allSheets.length === 1 && allSheets[0].getName() !== 'Painting') {
+      // This file has exactly one tab, and it isn't Painting — it must
+      // be pre-existing Galv data, created back when this file only
+      // ever held one system, under whatever Google's default tab name
+      // happened to be. Adopt it rather than starting a second, empty
+      // "Galv" tab alongside it.
+      sheet = allSheets[0];
+      sheet.setName('Galv');
+    } else if (allSheets.length === 1 && allSheets[0].getLastRow() === 0) {
+      // Brand new, still-blank file — just claim its one default tab.
+      sheet = allSheets[0];
+      sheet.setName(tabName);
+    } else {
+      sheet = ss.insertSheet(tabName);
+    }
+    if (sheet.getLastRow() === 0) {
+      sheet.getRange(1, 1, 1, LOG_HEADERS.length).setValues([LOG_HEADERS]);
+      // Force the Job Number column to stay as plain text, so purely
+      // numeric job numbers (e.g. "144555") don't silently turn into
+      // actual numbers, which breaks text searching/matching on them.
+      sheet.getRange('B:B').setNumberFormat('@');
+    }
+  }
+
+  // Self-heal: if a header defined above doesn't exist in this sheet yet
+  // (e.g. it was created before a new column was added), tack it on the
+  // end automatically instead of requiring the sheet to be recreated.
+  ensureHeaders(sheet);
+  return sheet;
+}
+
+function ensureHeaders(sheet) {
+  var lastCol = Math.max(sheet.getLastColumn(), 1);
+  var existingHeaders = sheet.getRange(1, 1, 1, lastCol).getValues()[0];
+  var missing = LOG_HEADERS.filter(function(h) { return existingHeaders.indexOf(h) === -1; });
+  if (missing.length > 0) {
+    sheet.getRange(1, lastCol + 1, 1, missing.length).setValues([missing]);
+  }
+}
+
+// Looks up which column number (1-indexed) each header currently lives
+// in, so the read/write code below never has to hardcode column
+// positions — safe regardless of the order columns were added in.
+function getHeaderMap(sheet) {
+  var lastCol = sheet.getLastColumn();
+  var headers = sheet.getRange(1, 1, 1, lastCol).getValues()[0];
+  var map = {};
+  headers.forEach(function(h, i) { if (h) map[h] = i + 1; });
+  return map;
+}
+
+// ── uploadPhoto — identical pattern to Ullr's ────────────────────────
+// The actual file-writing work lives in uploadPhotoToFolder() below so
+// bookOut/bookIn can also do the upload themselves in a single call,
+// instead of requiring a separate round trip first.
+function uploadPhotoToFolder(folder, base64Data, filename) {
+  var decoded  = Utilities.base64Decode(base64Data);
+  var mimeType = (filename || '').toLowerCase().endsWith('.png') ? 'image/png' : 'image/jpeg';
+  var blob     = Utilities.newBlob(decoded, mimeType, filename || '');
+  var file     = folder.createFile(blob);
+  file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+  return { id: file.getId(), url: file.getUrl() };
+}
+
+function uploadPhoto(params) {
+  var verified = verifyUser(params.email);
+  if (!verified.approved) return { error: 'Unauthorised' };
+  var folderInfo = getOrCreateFolderForCompany(verified.company);
+  var folder = DriveApp.getFolderById(folderInfo.id);
+  return uploadPhotoToFolder(folder, params.base64Data, params.filename);
+}
+
+// ── Book an item OUT ──────────────────────────────────────────────────
+// Adds a new row with status OUT. Returns the row's ID so the app can
+// reference it later when the item comes back in. Accepts either a
+// ready-made photoLink (older two-step flow) or the raw photo itself
+// (base64Data/filename) to upload as part of this same call.
+function bookOut(params) {
+  var lock = LockService.getScriptLock();
+  var gotLock = false;
+  try { gotLock = lock.tryLock(10000); } catch (e) { gotLock = false; }
+  if (!gotLock) return { error: 'BUSY', message: 'Another item is being booked out right now — please wait a moment and try again.' };
+
+  try {
+    var verified = verifyUser(params.email);
+    if (!verified.approved) return { error: 'Unauthorised' };
+    var folderInfo = getOrCreateFolderForCompany(verified.company);
+    var folder = DriveApp.getFolderById(folderInfo.id);
+
+    var photoLink = params.photoLink || '';
+    if (!photoLink && params.base64Data) {
+      var uploaded = uploadPhotoToFolder(folder, params.base64Data, params.filename);
+      photoLink = 'https://drive.google.com/file/d/' + uploaded.id + '/view';
+    }
+
+    var sheet = getCompanyLogSheet(verified.company, folderInfo.id, params.system);
+    var cols  = getHeaderMap(sheet);
+
+    var id = 'g' + new Date().getTime() + Math.floor(Math.random() * 1000);
+
+    // Written as a HYPERLINK formula so the sheet shows a short, friendly
+    // label instead of the full raw web address — same as the POD app.
+    var photoCell = photoLink ? '=HYPERLINK("' + photoLink + '","📸 View Photo")' : '';
+
+    var rowNum = sheet.getLastRow() + 1;
+    sheet.getRange(rowNum, cols['ID']).setValue(id);
+    sheet.getRange(rowNum, cols['Job Number']).setValue(params.jobNumber || '');
+    sheet.getRange(rowNum, cols['Status']).setValue('OUT');
+    sheet.getRange(rowNum, cols['Date Out']).setValue(params.dateOut || new Date().toISOString());
+    sheet.getRange(rowNum, cols['Photo Out Link']).setValue(photoCell);
+    sheet.getRange(rowNum, cols['Sent By']).setValue(verified.name || verified.email);
+    sheet.getRange(rowNum, cols['Quantity Out']).setValue(params.quantityOut ? Number(params.quantityOut) : 1);
+    return { id: id };
+  } catch (err) {
+    return { error: err.toString() };
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+// ── Get everything still OUT (not yet booked back in) ────────────────
+// A cell written as =HYPERLINK("url","label") shows the friendly label to
+// anyone looking at the sheet, but getValues() alone would hand the app
+// that label text instead of the real address. This pulls the actual URL
+// back out of the formula so photos still load correctly in the app.
+function extractLinkUrl(formulaText, plainValue) {
+  if (formulaText && formulaText.indexOf('HYPERLINK') !== -1) {
+    var match = formulaText.match(/HYPERLINK\(\s*"([^"]+)"/i);
+    if (match) return match[1];
+  }
+  return plainValue || '';
+}
+
+function getPendingItems(email, system) {
+  var verified = verifyUser(email);
+  if (!verified.approved) return { error: 'Unauthorised' };
+  var folderInfo = getOrCreateFolderForCompany(verified.company);
+  var sheet = getCompanyLogSheet(verified.company, folderInfo.id, system);
+  var cols  = getHeaderMap(sheet);
+  var values   = sheet.getDataRange().getValues();
+  var formulas = sheet.getDataRange().getFormulas();
+
+  var idCol = cols['ID'] - 1, jobCol = cols['Job Number'] - 1, statusCol = cols['Status'] - 1,
+      dateOutCol = cols['Date Out'] - 1, photoCol = cols['Photo Out Link'] - 1, sentByCol = cols['Sent By'] - 1,
+      qtyCol = cols['Quantity Out'] - 1;
+
+  var items = [];
+  for (var i = 1; i < values.length; i++) {
+    var row = values[i];
+    if ((row[statusCol] || '') === 'OUT') {
+      items.push({
+        id:          row[idCol],
+        jobNumber:   (row[jobCol] === null || row[jobCol] === undefined) ? '' : row[jobCol].toString(),
+        dateOut:     row[dateOutCol],
+        photoLink:   extractLinkUrl(formulas[i][photoCol], row[photoCol]),
+        sentBy:      row[sentByCol],
+        quantityOut: row[qtyCol] || 1,
+      });
+    }
+  }
+  // Newest first
+  items.sort(function(a, b) { return new Date(b.dateOut) - new Date(a.dateOut); });
+  return { items: items };
+}
+
+// ── Book an item back IN ──────────────────────────────────────────────
+function bookIn(params) {
+  var lock = LockService.getScriptLock();
+  var gotLock = false;
+  try { gotLock = lock.tryLock(10000); } catch (e) { gotLock = false; }
+  if (!gotLock) return { error: 'BUSY', message: 'Another item is being booked in right now — please wait a moment and try again.' };
+
+  try {
+    var verified = verifyUser(params.email);
+    if (!verified.approved) return { error: 'Unauthorised' };
+    var folderInfo = getOrCreateFolderForCompany(verified.company);
+    var folder = DriveApp.getFolderById(folderInfo.id);
+    var sheet = getCompanyLogSheet(verified.company, folderInfo.id, params.system);
+    var cols  = getHeaderMap(sheet);
+    var data  = sheet.getDataRange().getValues();
+    var idCol = cols['ID'] - 1, statusCol = cols['Status'] - 1;
+
+    for (var i = 1; i < data.length; i++) {
+      if (data[i][idCol] === params.id) {
+        if (data[i][statusCol] === 'IN') {
+          return { error: 'This item was already booked in by someone else.' };
+        }
+        var photoLink = params.photoLink || '';
+        if (!photoLink && params.base64Data) {
+          var uploaded = uploadPhotoToFolder(folder, params.base64Data, params.filename);
+          photoLink = 'https://drive.google.com/file/d/' + uploaded.id + '/view';
+        }
+        var gpsInUrl = (params.latitude && params.longitude)
+          ? 'https://www.google.com/maps?q=' + params.latitude + ',' + params.longitude
+          : '';
+
+        var rowNum = i + 1; // sheet rows are 1-indexed, row 1 is the header
+        var photoInCell = photoLink ? '=HYPERLINK("' + photoLink + '","📸 View Photo")' : '';
+        var gpsInCell   = gpsInUrl ? '=HYPERLINK("' + gpsInUrl + '","📍 View on Map")' : '';
+
+        sheet.getRange(rowNum, cols['Status']).setValue('IN');
+        sheet.getRange(rowNum, cols['Date In']).setValue(params.dateIn || new Date().toISOString());
+        sheet.getRange(rowNum, cols['Booked In By']).setValue(verified.name || verified.email);
+        sheet.getRange(rowNum, cols['Photo In Link']).setValue(photoInCell);
+        sheet.getRange(rowNum, cols['GPS In Link']).setValue(gpsInCell);
+        sheet.getRange(rowNum, cols['Quantity In']).setValue(params.quantityIn ? Number(params.quantityIn) : 1);
+        return { success: true };
+      }
+    }
+    return { error: 'Item not found — it may already have been booked in by someone else.' };
+  } catch (err) {
+    return { error: err.toString() };
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+// ── doGet / doPost ────────────────────────────────────────────────────
+// Same authentication approach as Ullr: the Cloudflare Worker checks the
+// Google OAuth token in the Authorization header before forwarding the
+// request here, so no shared secret needs to live in this script.
+
+function doGet(e) {
+  return ContentService.createTextOutput(JSON.stringify({ status: 'ok' })).setMimeType(ContentService.MimeType.JSON);
+}
+
+function doPost(e) {
+  try {
+    var params = JSON.parse(e.postData.contents);
+    if (params.secret !== SECRET) {
+      return ContentService.createTextOutput(JSON.stringify({ error: 'Unauthorised' })).setMimeType(ContentService.MimeType.JSON);
+    }
+    var action = params.action;
+    var result;
+    if (action === 'verifyUser') {
+      result = verifyUser(params.email);
+    } else if (action === 'getFolder') {
+      result = getOrCreateFolder(params.email);
+    } else if (action === 'uploadPhoto') {
+      result = uploadPhoto(params);
+    } else if (action === 'bookOut') {
+      result = bookOut(params);
+    } else if (action === 'getPendingItems') {
+      result = getPendingItems(params.email, params.system);
+    } else if (action === 'bookIn') {
+      result = bookIn(params);
+    } else {
+      result = { error: 'Unknown action' };
+    }
+    return ContentService.createTextOutput(JSON.stringify(result)).setMimeType(ContentService.MimeType.JSON);
+  } catch (err) {
+    return ContentService.createTextOutput(JSON.stringify({ error: err.toString(), stack: err.stack })).setMimeType(ContentService.MimeType.JSON);
+  }
+}
