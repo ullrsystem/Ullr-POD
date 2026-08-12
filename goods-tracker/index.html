@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Ullr Tracker">
+<meta name="theme-color" content="#0a0c10">
+<title>Ullr Tracker — Choose System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0a0c10;--void-2:#12151c;--void-3:#1c2030;
+  --steel:#2a2f3d;--steel-2:#363d50;
+  --mist:#8892a4;--fog:#c4cad6;--white:#f0f4ff;
+  --signal:#3b82f6;--signal-dk:#2563eb;--signal-glow:rgba(59,130,246,0.15);
+  --go:#10b981;--go-dk:#059669;
+  --warn:#f59e0b;--danger:#ef4444;
+  --radius:14px;--radius-sm:10px;--radius-xs:7px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+button,.system-card{transition:transform .1s ease, opacity .1s ease;}
+button:active,.system-card:active{transform:scale(0.97);opacity:0.85;}
+body{font-family:'DM Sans',sans-serif;background:var(--void);min-height:100vh;color:var(--white);}
+
+#accessGate{position:fixed;inset:0;z-index:9999;background:var(--void);display:flex;align-items:center;justify-content:center;padding:24px;}
+.gate-inner{background:var(--void-2);border:1px solid var(--steel);border-radius:20px;padding:48px 32px 40px;max-width:380px;width:100%;text-align:center;position:relative;overflow:hidden;}
+.gate-inner::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--signal),transparent);}
+.gate-logo{width:56px;height:56px;margin:0 auto 24px;display:flex;align-items:center;justify-content:center;font-size:34px;}
+.gate-inner h2{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--white);margin-bottom:4px;}
+.gate-sub{font-size:10px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--mist);margin-bottom:32px;}
+.gate-inner p{font-size:13px;color:var(--mist);margin-bottom:28px;line-height:1.6;}
+#gateSignInBtn{width:100%;padding:15px;background:var(--signal);color:#fff;border:none;border-radius:var(--radius-sm);font-family:'Syne',sans-serif;font-size:13px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;}
+#gateSignInBtn:hover{background:var(--signal-dk);}
+#gateError{display:none;margin-top:16px;padding:12px 14px;background:rgba(239,68,68,0.1);color:#fca5a5;border:1px solid rgba(239,68,68,0.2);border-radius:var(--radius-xs);font-size:12px;font-weight:500;line-height:1.5;}
+.hidden{display:none!important;}
+
+.picker-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;}
+.picker-header{text-align:center;margin-bottom:8px;}
+.picker-header h1{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;letter-spacing:2px;text-transform:uppercase;}
+.picker-header p{font-size:11px;color:var(--mist);letter-spacing:1px;text-transform:uppercase;margin-top:6px;}
+#companyLabel{font-size:11px;color:var(--mist);font-family:'DM Mono',monospace;margin-top:14px;margin-bottom:34px;text-align:center;}
+.system-grid{display:grid;gap:14px;width:100%;max-width:380px;}
+.system-card{background:var(--void-2);border:1px solid var(--steel);border-radius:var(--radius);padding:24px 20px;display:flex;align-items:center;gap:16px;cursor:pointer;text-align:left;}
+.system-card:hover{border-color:var(--signal);background:var(--signal-glow);}
+.system-icon{width:52px;height:52px;border-radius:12px;background:var(--void-3);border:1px solid var(--steel);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;}
+.system-name{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--white);}
+.system-desc{font-size:12px;color:var(--mist);margin-top:3px;}
+#signOutLink{margin-top:34px;background:none;border:none;color:var(--mist);font-size:12px;text-decoration:underline;cursor:pointer;}
+</style>
+</head>
+<body>
+
+<div id="accessGate">
+  <div class="gate-inner">
+    <div class="gate-logo">🏭</div>
+    <h2>Ullr Tracker</h2>
+    <p class="gate-sub">Out / In Log</p>
+    <p>Sign in with your authorised Google account to access the system.</p>
+    <button id="gateSignInBtn">Sign in with Google</button>
+    <div id="gateError"></div>
+  </div>
+</div>
+
+<div class="picker-wrap hidden" id="pickerScreen">
+  <div class="picker-header">
+    <h1>Choose a System</h1>
+    <p>Which stage are you working today?</p>
+  </div>
+  <p id="companyLabel"></p>
+  <div class="system-grid">
+    <div class="system-card" data-system="galv">
+      <div class="system-icon">📦</div>
+      <div>
+        <div class="system-name">Galv</div>
+        <div class="system-desc">Galvanising out / in log</div>
+      </div>
+    </div>
+    <div class="system-card" data-system="painting">
+      <div class="system-icon">🎨</div>
+      <div>
+        <div class="system-name">Painting</div>
+        <div class="system-desc">Painting out / in log</div>
+      </div>
+    </div>
+  </div>
+  <button id="signOutLink">Sign out</button>
+</div>
+
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="shared.js"></script>
+<script>
+function goToSystem(system) {
+  localStorage.setItem('goodsTrackerLastSystem', system);
+  location.href = system + '/';
+}
+
+document.querySelectorAll('.system-card').forEach(card => {
+  card.addEventListener('click', () => goToSystem(card.dataset.system));
+});
+
+document.getElementById('signOutLink').addEventListener('click', () => {
+  if (confirm('Are you sure you want to sign out?')) { signOutLocally(); location.reload(); }
+});
+
+// Called by shared.js once sign-in is confirmed. If this device already
+// has a remembered system, skip straight to it instead of showing the
+// picker every time.
+window.onSessionReady = async function () {
+  const remembered = localStorage.getItem('goodsTrackerLastSystem');
+  if (remembered === 'galv' || remembered === 'painting') {
+    location.href = remembered + '/';
+    return;
+  }
+  document.getElementById('pickerScreen').classList.remove('hidden');
+};
+
+window.addEventListener('load', () => waitForGIS(10));
+</script>
+</body>
+</html>
